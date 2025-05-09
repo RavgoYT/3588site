@@ -6,5 +6,5 @@
 Official website for Team 3588 The Talon.
 
 <p align="center">
-  <img src="./public/images/heropage.png alt="Website" width="738">
+  <img src="./public/images/heropage.png" alt="Website" width="738">
 </p>
