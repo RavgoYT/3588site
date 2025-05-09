@@ -94,7 +94,7 @@ export default function Header() {
           <div className="flex items-center space-x-3">
             <h1 className="text-xl font-display select-none font-bold header-scale">TEAM 3588</h1>
             <div className="w-10 h-10 bg-white/0 rounded-sm mr-3 flex items-center justify-center">
-              <img src="/images/mainlogo.svg" alt="Team 3588 Logo" className="h-full w-auto" />
+              <img src="./images/mainlogo.svg" alt="Team 3588 Logo" className="h-full w-auto" />
             </div>
             <h1 className="text-xl font-mono select-none header-scale">THE TALON</h1>
           </div>

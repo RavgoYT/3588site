@@ -21,7 +21,7 @@ const HeroSection = ({ scrollY }) => {
             {/* Robot image here */}
             <div className="w-screen mx-auto bg-black flex items-center justify-center overflow-hidden">
               <img
-                src="/images/robot.png"
+                src="./images/robot.png"
                 alt="Team 3588 Robot"
                 className="w-screen h-full object-cover fade-mask"
               />
