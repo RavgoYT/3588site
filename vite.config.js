@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: '/3588site',
   server: {
-    host: true
+    host: true //
   }
 })

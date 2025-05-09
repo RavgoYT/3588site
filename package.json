@@ -1,7 +1,6 @@
 {
   "name": "3588-website",
   "homepage": "https://ravgoyt.github.io/3588site/",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
