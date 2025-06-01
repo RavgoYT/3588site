@@ -1,16 +1,19 @@
 import React from "react";
-import GradientFrame from "./gradientFrame";
 
-const GradientImageFrame = ({ src, alt }) => {
-	return (
-		<GradientFrame>
-			<img
-				src={src}
-				alt={alt}
-				className="h-full object-cover rounded-md"
-			/>
-		</GradientFrame>
-	);
+const GradientImageFrame = ({ children }) => {
+  return (
+    <div
+      className="rounded-3xl p-3"
+      style={{
+        backgroundImage:
+          "linear-gradient(to right, var(--color-navy-blue), var(--color-poppy))",
+      }}
+    >
+      <div className="relative rounded-2xl overflow-hidden bg-white">
+        {children}
+      </div>
+    </div>
+  );
 };
 
 export default GradientImageFrame;

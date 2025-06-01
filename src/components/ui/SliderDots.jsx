@@ -8,12 +8,18 @@ import React from 'react';
  */
 const SliderDots = ({ count, active }) => {
   return (
-    <div className="flex justify-center space-x-2 mt-2">
+    <div className="flex justify-center space-x-2 mt-4">
       {Array.from({ length: count }).map((_, i) => (
         <div
           key={i}
-          className={`w-2 h-2 rounded-full ${i === active ? 'bg-white' : 'bg-gray-500'}`}
-        />
+          className="w-6 h-6 rounded-full border-6 border-white flex items-center justify-center"
+        >
+          <div className="w-4 aspect-square flex items-center rounded-full"
+            style={{
+              backgroundColor: i === active ? '#3B82F6' : 'transparent'
+            }}
+          />
+        </div>
       ))}
     </div>
   );

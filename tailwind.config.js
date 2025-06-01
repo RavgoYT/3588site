@@ -10,7 +10,7 @@ export default {
     theme: {
       extend: {
         spacing: {
-        'section': '20rem'
+        'section': '80rem'
         },
         fontFamily: {
             ttnorms: ['TTNorms'],
@@ -18,5 +18,13 @@ export default {
           },
       },
     },
-    plugins: [],
+    plugins: [
+      function ({ addComponents }) {
+        addComponents({
+          'p': {
+            fontSize: '1.25rem', // Sets the default text size for paragraphs globally
+          },
+        });
+      }
+    ],
   }

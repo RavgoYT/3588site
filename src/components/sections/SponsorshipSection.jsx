@@ -6,7 +6,7 @@ const SponsorshipSection = () => {
   const sponsorshipLevels = ['TALON HATCHLING', 'TALON FLEDGLING', 'TALON FULL'];
   
   return (
-    <section id="sponsors" className="py-12">
+    <section id="sponsors" className="py-20">
       <div className="container mx-auto px-8">
         {/* Horizontal sponsorship levels */}
         <div className="flex flex-wrap justify-center gap-8 mb-8">

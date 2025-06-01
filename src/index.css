@@ -61,6 +61,15 @@ a.header-link {
 	color: inherit;
 }
 
+.gradient-arrow {
+  font-size: 48px;
+  display: inline-block;
+  color: white;
+  position: relative;
+  z-index: 1;
+}
+
+
 a.header-link:hover {
 	color: inherit;
 }
