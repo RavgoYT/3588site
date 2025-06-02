@@ -1,57 +1,67 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import SliderDots from "../SliderDots";
 import GradientImageFrame from "../GradientImageFrame";
 import GradientArrows from "../GradientArrows";
 import rawSlidesData from "../../../assets/carouselData.json";
-import { shuffle } from 'txt-shuffle';
+import { shuffle } from "txt-shuffle";
+
+// Animation variants for tags only
+const tagVariants = {
+	initial: { opacity: 0, scale: 0 },
+	animate: (i) => ({
+		opacity: 1,
+		scale: 1,
+		transition: { delay: i * 0.1, type: "spring", stiffness: 300, damping: 15 },
+	}),
+	exit: { opacity: 0, scale: 0.4 },
+};
 
 // Custom component to handle text shuffling
 const TextShuffle = ({ text, className, style, duration, animation, direction, glyphs, delay }) => {
-	const [displayText, setDisplayText] = useState(text);
-	const cancelRef = React.useRef(null);
+  const [displayText, setDisplayText] = useState(text);
+  const cancelRef = React.useRef(null);
 
-	useEffect(() => {
-		// Cancel any previous shuffle
-		if (cancelRef.current) {
-			cancelRef.current(); // this cancels the running animation
-		}
+  useEffect(() => {
+    // Cancel any ongoing shuffle before starting a new one
+    if (cancelRef.current) {
+      cancelRef.current();
+      cancelRef.current = null;
+    }
+    // Reset displayText only *after* cancelling previous shuffle
+    setDisplayText("");
 
-		setDisplayText(""); // reset display before new animation
+    const cancel = shuffle({
+      text,
+      duration,
+      fps: 60,
+      glyphs: glyphs || "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:',.<>?/~`",
+      animation,
+      direction,
+      delayResolve: delay || 0,
+      onUpdate: (output) => setDisplayText(output),
+    });
 
-		const cancel = shuffle({
-			text,
-			duration,
-			fps: 60,
-			glyphs: glyphs || "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:',.<>?/~`",
-			animation,
-			direction,
-			delayResolve: delay || 0,
-			onUpdate: (output) => {
-				setDisplayText(output);
-			},
-		});
+    cancelRef.current = cancel;
 
-		// Store the cancel function
-		cancelRef.current = cancel;
+    // Cleanup on unmount or before next effect run
+    return () => {
+      if (cancelRef.current) {
+        cancelRef.current();
+        cancelRef.current = null;
+      }
+    };
+  }, [text, duration, animation, direction, glyphs, delay]);
 
-		// Clean up when component unmounts or text changes
-		return () => {
-			if (cancelRef.current) {
-				cancelRef.current();
-			}
-		};
-	}, [text, duration, animation, direction, glyphs]);
-
-	return (
-		<span className={className} style={style}>
-			{displayText}
-		</span>
-	);
+  return (
+    <span className={className} style={style}>
+      {displayText}
+    </span>
+  );
 };
 
 
@@ -87,16 +97,16 @@ const ContentCarousel = () => {
 
 	const getTagColor = (tag, index) => {
 		const colors = [
-			"bg-[#6687c8] text-white", // Glaucous
-			"bg-[#e23942] text-white", // Poppy
-			"bg-[#cb6ce6] text-white", // Heliotrope
-			"bg-[#B8D5B8] text-black", // Celadon
-			"bg-[#D7B49E] text-black", // Desert Sand
-			"bg-[#FFD3DA] text-black", // Mimi Pink
-			"bg-[#FDFCDC] text-black", // Light Yellow
-			"bg-[#c8c866] text-black", // Lime
-			"bg-[#a875f7] text-white", // Lavender
-			"bg-[#5a9f88] text-white", // Forest Green
+			"bg-[#6687c8] text-white",
+			"bg-[#e23942] text-white",
+			"bg-[#cb6ce6] text-white",
+			"bg-[#B8D5B8] text-black",
+			"bg-[#D7B49E] text-black",
+			"bg-[#FFD3DA] text-black",
+			"bg-[#FDFCDC] text-black",
+			"bg-[#c8c866] text-black",
+			"bg-[#a875f7] text-white",
+			"bg-[#5a9f88] text-white",
 		];
 		return colors[index % colors.length];
 	};
@@ -114,10 +124,9 @@ const ContentCarousel = () => {
 									modules={[Autoplay]}
 									spaceBetween={0}
 									slidesPerView={1}
-									autoplay={{ delay: 8000, disableOnInteraction: false }}
+									autoplay={{ delay: 5000, disableOnInteraction: false }}
 									onSwiper={setSwiperInstance}
 									onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
-
 									className="w-[560px] h-[315px]"
 									effect="slide"
 									speed={500}
@@ -170,12 +179,12 @@ const ContentCarousel = () => {
 						/>
 					</div>
 
-					<div className="flex-1 text-white space-y-6 mt-[-20px]" style={{ fontFamily: "HK Modular" }}>
-						<motion.h3
-							layout
-							className="text-4xl font-bold uppercase tracking-wide"
-							transition={{ duration: 0.4, ease: "easeInOut" }}
-						>
+					<div
+						className="flex-1 text-white space-y-6 mt-[-20px]"
+						style={{ fontFamily: "HK Modular" }}
+					>
+						{/* No motion here, just TextShuffle */}
+						<h3 className="text-4xl font-bold uppercase tracking-wide">
 							<TextShuffle
 								text={slides[currentSlide].title}
 								style={{ fontFamily: "HK Modular" }}
@@ -184,26 +193,27 @@ const ContentCarousel = () => {
 								direction="random"
 								glyphs="3588"
 							/>
-						</motion.h3>
+						</h3>
 
-						<motion.p
-							layout
+						<p
 							className="text-gray-300 leading-relaxed text-xl max-w-2xl"
 							style={{ fontFamily: "TTNorms" }}
-							transition={{ duration: 0.4 }}
 						>
 							<TextShuffle
 								text={slides[currentSlide].description}
 								style={{ fontFamily: "TTNorms" }}
-								duration={Math.min(4, 0.3462 + 0.01923 * (slides[currentSlide].description?.length || 0))}
+								duration={Math.min(
+									4,
+									0.3462 + 0.01923 * (slides[currentSlide].description?.length || 0)
+								)}
 								animation="stay"
 								direction="right"
 								glyphs="_"
 								delay={0}
 							/>
-						</motion.p>
+						</p>
 
-						<motion.div layout className="space-y-3" transition={{ duration: 0.4 }}>
+						<div className="space-y-3">
 							<div className="text-sm font-bold uppercase tracking-wider text-white">
 								<TextShuffle text="TAGS" style={{ fontFamily: "HK Modular" }} />
 							</div>
@@ -212,11 +222,17 @@ const ContentCarousel = () => {
 									.filter(([key, value]) => key.startsWith("tag") && value)
 									.map(([key, tag], index) => (
 										<motion.span
-											layout
 											key={`${currentSlide}-${index}`}
-											className={`px-4 py-2 text-sm font-bold uppercase rounded-lg ${getTagColor(tag, index)}`}
+											custom={index}
+											variants={tagVariants}
+											initial="initial"
+											animate="animate"
+											exit="exit"
+											className={`px-4 py-2 text-sm font-bold uppercase rounded-lg ${getTagColor(
+												tag,
+												index
+											)}`}
 											style={{ fontFamily: "HK Modular" }}
-											transition={{ duration: 0.4 }}
 										>
 											<TextShuffle
 												text={tag}
@@ -225,11 +241,12 @@ const ContentCarousel = () => {
 												animation="stay"
 												direction="random"
 												glyphs="###"
+												delay="0.3"
 											/>
 										</motion.span>
 									))}
 							</div>
-						</motion.div>
+						</div>
 					</div>
 				</div>
 			</div>
