@@ -1,0 +1,21 @@
+{
+  "leads": {
+    "Eddy W": {
+      "name": "Eddy W",
+      "image": "https://picsum.photos/150?random=30",
+      "description": "Lead Programmer with a focus on hardware control and autonomous systems."
+    },
+    "Eden G": {
+      "name": "Eden G",
+      "image": "https://picsum.photos/150?random=32",
+      "description": "Lead Programmer with a focus on hardware control and autonomous systems."
+    }
+  },
+  "mentors": {
+    "Tim W": {
+      "name": "Tim W",
+      "image": "https://picsum.photos/150?random=31",
+      "description": "Experienced mentor with a background in robotics and programming."
+    }
+  }
+}

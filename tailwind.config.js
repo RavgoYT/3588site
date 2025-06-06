@@ -16,6 +16,7 @@ export default {
             ttnorms: ['TTNorms'],
             hk: ['HK Modular']
           },
+        listStyle: 'disc'
       },
     },
     plugins: [

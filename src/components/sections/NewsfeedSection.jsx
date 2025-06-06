@@ -1,6 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { fadeIn } from "../../utils/animations";
 import SliderDots from "../ui/SliderDots";
 import GradientFrame from "../ui/GradientFrame";
 import GradientImageFrame from "../ui/GradientImageFrame";

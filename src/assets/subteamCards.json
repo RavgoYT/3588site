@@ -1,0 +1,39 @@
+{
+	"subteams": [
+		{
+			"title": "PROJECT MANAGEMENT",
+			"description": "Lead Lead",
+			"iconName": "ProjectManagement"
+		},
+		{
+			"title": "ELECTRICAL",
+			"description": "Zap Zap",
+			"iconName": "Electrical"
+		},
+		{
+			"title": "DESIGN",
+			"description": "Vroom Vroom",
+			"iconName": "Design",
+      "mentors": ["Tim W"],
+			"longDescription": "The design team is a team that I do not have the time to write this for however I am writing anyway because I need somewhere to test something else"
+		},
+		{
+			"title": "PROGRAMMING",
+			"description": "Our Programming team uses Java to interface and control hardware, act on driver input and provide feedback, and build autonomous systems",
+			"iconName": "Programming",
+			"leads": ["Eddy W", "Eden G"],
+			"mentors": ["Example Mentor"],
+			"longDescription": "Our programming team focuses on three core areas that power our robot's performance:\n\n### Hardware Control\n- Communicate with hardware over the CAN chain.\n- Implement PID positioning and velocity loops to control mechanisms.\n- Use System Identification to determine feedforward gains.\n- Utilize motion profiling and kinematics for precise and smooth mechanism movements.\n\n### User Input & Feedback\n- Design intuitive user interfaces and controls to simplify command input for drivers.\n- Process and execute a variety of commands efficiently and reliably.\n- Create a live dashboard displaying real-time data and robot states.\n- Integrate LED indicators to provide clear, immediate visual feedback.\n\n### Autonomous Systems\n- Use April Tag vision, gyroscope, accelerometer, and wheel rotation sensors for accurate robot localization.\n- Complete objectives during the fully autonomous period.\n- Assist driver alignment through autonomous operations.\n- Perform other operations autonomously to increase driver efficiency.\n\nTogether, these efforts allow us to build a robot that is precise, responsive, and easy to control under any match conditions."
+		},
+		{
+			"title": "FABRICATION",
+			"description": "Our fabrication has two primary sections: part machining and subsystem assembly. For part assembly we use a mix of manual mills and lathes as well as CNC mills, 3D printers, and a laser cutter. Outside of building the robot, fabrication builds our pit for competition and a wooden practice field",
+			"iconName": "Fabrication"
+		},
+		{
+			"title": "BUSINESS & MEDIA",
+			"description": "Money Money",
+			"iconName": "Business"
+		}
+	]
+}

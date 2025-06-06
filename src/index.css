@@ -16,6 +16,16 @@
 	font-weight: 700;
 	font-style: normal;
 }
+ul {
+  @apply list-disc pl-5;
+}
+
+.modal-dialog {
+  width: fit-content !important;
+  max-width: 80% !important; 
+  padding-top: 32px !important; 
+  padding-bottom: 32px !important; 
+}
 
 :root {
 	font-family: "TTNorms", sans-serif;
