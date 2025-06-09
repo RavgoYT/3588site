@@ -83,15 +83,15 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-[75%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-md ${
+      className={`fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-[75%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-lg ${
         scrolled
           ? 'py-4 px-8 top-6'
           : 'py-4 px-8 top-0'
       } bg-gradient-to-r from-[var(--color-navy-blue)]/60 to-[var(--color-poppy)]/60`}
     >
-      <div className="flex justify-between items-center">
-        <div className="flex items-center">
-          <div className="flex items-center space-x-3">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center w-full">
+        <div className="flex items-center justify-center w-full lg:w-auto">
+          <div className="flex items-center space-x-3 justify-center w-full lg:justify-start">
             <h1 className="text-xl font-display select-none font-bold header-scale">TEAM 3588</h1>
             <div className="w-10 h-10 bg-white/0 rounded-sm mr-3 flex items-center justify-center">
               <img src="./images/mainlogo.svg" alt="Team 3588 Logo" className="h-full w-auto" />
@@ -99,7 +99,7 @@ export default function Header() {
             <h1 className="text-xl font-mono select-none header-scale">THE TALON</h1>
           </div>
         </div>
-        <nav className="hidden md:flex space-x-6">
+        <nav className="hidden lg:flex space-x-6">
           {sections.map((section) => (
             <Link
               key={section}
