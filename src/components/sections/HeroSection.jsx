@@ -26,7 +26,7 @@ const HeroSection = ({ scrollY }) => {
         }}
       >
         <div className="text-center">
-          <div className="mb-0 pt-16 md:pt-32 lg:pt-62 xl:pt-75">
+          <div className="mb-0 md:pt-32 lg:pt-62 xl:pt-75">
             {/* Robot image without parallax effect */}
             <div className="w-screen mx-auto bg-black flex items-center justify-center overflow-hidden">
               <img
@@ -36,7 +36,7 @@ const HeroSection = ({ scrollY }) => {
               />
               {/* READY FOR TAKEOFF */}
               <div className="absolute left-1/2 top-[79%] -translate-x-1/2 -translate-y-1/2 text-center">
-                <p className="takeoff-text">
+                <p className="text-2xl md:text-6xl font-[TTNorms] tracking-[1rem] md:tracking-[2rem] text-white text-center">
                   READY FOR TAKEOFF
                 </p>
               </div>

@@ -113,7 +113,6 @@ header .flex.items-center:first-child {
 figure out how to make sure the text is in the same spot on the image */
 .takeoff-text {
 	font-family: "TTNorms", sans-serif;
-	font-size: 2.8rem; /* beeeg */
 	letter-spacing: 0.7em; /* widely spaced */
 	color: white;
 	text-align: center;
@@ -126,10 +125,6 @@ body {
 	min-width: 320px;
 	min-height: 100vh;
 	font-size: 18px;
-}
-
-p {
-	font-size: 15px;
 }
 
 html,
