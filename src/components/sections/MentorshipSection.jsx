@@ -49,7 +49,7 @@ const MentorshipSection = () => {
 				<h3 className="uppercase pt-10 pb-3 text-center">
 					Interested in signing up to mentor or have questions?
 				</h3>
-				<Button variant="primary" href="https://docs.google.com/forms/d/e/1FAIpQLSf3CEYRFiTSqTRevbfUh1hhwWLFUK2HFYo_NsTJTmWRXdPgCQ/viewform?usp=sharing&ouid=101389165596220670387">Mentor Interest Form</Button>
+				<Button variant="primary" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLSf3CEYRFiTSqTRevbfUh1hhwWLFUK2HFYo_NsTJTmWRXdPgCQ/viewform?usp=sharing&ouid=101389165596220670387">Mentor Interest Form</Button>
 			</div>
 		</section>
 	);
