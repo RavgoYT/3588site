@@ -25,6 +25,23 @@ ul {
   max-width: 80% !important; 
   padding-top: 32px !important; 
   padding-bottom: 32px !important; 
+  margin: 1.75rem auto !important; /* vertical margin, horizontal auto for centering */
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+}
+
+@media (max-width: 600px) {
+  .modal-dialog {
+    max-width: 95vw !important;
+    min-width: 0 !important;
+    width: 95vw !important;
+    margin: 1.25rem 1rem !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
 }
 
 :root {
