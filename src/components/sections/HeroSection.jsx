@@ -7,19 +7,19 @@ import React from 'react';
  */
 const HeroSection = ({ scrollY }) => {
   // Define a scroll threshold where the effect stops
-  const threshold = 1000;
+  const threshold = window.innerHeight * 0.15; // 10% of viewport height
 
   // Apply a maximum translation and opacity reduction
   const translateY = scrollY * 0.2 > threshold ? threshold : scrollY * 0.2;
   const opacity = 1 - (scrollY * 0.001 > 0.5 ? 0.5 : scrollY * 0.001); // Prevent opacity from going below 0.5
 
   return (
-    <section id="home" className="relative h-screen flex items-center justify-center ">
+    <section id="home" className="relative h-screen flex items-center justify-center">
       <div className="absolute inset-0 z-0">
         {/* No gradient background */}
       </div>
       <div
-        className="absolute inset-0 flex items-center justify-center z-10"
+        className="absolute inset-0 flex items-center justify-center"
         style={{
           transform: `translateY(${translateY}px)`, // Apply the calculated translation
           opacity: opacity, // Apply the calculated opacity
