@@ -36,7 +36,7 @@ const HeroSection = ({ scrollY }) => {
               />
               {/* READY FOR TAKEOFF */}
               <div className="absolute left-1/2 top-[79%] -translate-x-1/2 -translate-y-1/2 text-center">
-                <p className="text-2xl md:text-6xl font-[TTNorms] tracking-[1rem] md:tracking-[2rem] text-white text-center">
+                <p className="text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-[TTNorms] tracking-[1rem] md:tracking-[2rem] text-white text-center">
                   READY FOR TAKEOFF
                 </p>
               </div>
