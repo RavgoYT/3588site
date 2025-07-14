@@ -79,10 +79,10 @@ export const MentorshipCard = ({
 			</motion.div>
 			<Modal
 				className="bg-gray-900/50"
-				dialogClassName="w-auto"
+				dialogClassName="modal-fullscreen rounded-modal"
 				data-bs-theme="dark"
 				show={showModal}
-				backdrop="static"
+				backdrop={true}
 				onHide={() => setShowModal(false)}
 				centered
 			>

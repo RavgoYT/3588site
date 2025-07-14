@@ -68,6 +68,8 @@ const TextShuffle = ({ text, className, style, duration, animation, direction, g
 const ContentCarousel = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [swiperInstance, setSwiperInstance] = useState(null);
+	const mobileWidth = window.innerWidth * .60;
+	const mobileHeight = mobileWidth * 0.5625;
 
 	const slides = rawSlidesData.slides ?? [];
 
@@ -124,10 +126,10 @@ const ContentCarousel = () => {
 									modules={[Autoplay]}
 									spaceBetween={0}
 									slidesPerView={1}
-									autoplay={{ delay: 5000, disableOnInteraction: false }}
+									autoplay={{ delay: 8000, disableOnInteraction: false }}
 									onSwiper={setSwiperInstance}
 									onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
-									className="w-[560px] h-[315px]"
+									className="aspect-3/2 w-[85vw] md:w-[40vw] max-w-[500px] lg:max-w-[650px]"
 									effect="slide"
 									speed={500}
 									loop={true}

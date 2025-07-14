@@ -2,14 +2,14 @@ import React from "react";
 import SliderDots from "../ui/SliderDots";
 import GradientFrame from "../ui/GradientFrame";
 import GradientImageFrame from "../ui/GradientImageFrame";
-import ContentCarousel from "../ui/carousel/ContentCarousel";
+import ContentCarousel from "../ui/carousel/ImageCarousel";
 
 const NewsfeedSection = () => {
 	return (
 		<section id="newsfeed" className="py-0 bg-black h-full">
 			<div className="container mx-auto px-8">
 				{/* "Brought to you by" with logo */}
-				<div className="flex justify-center mb-14">
+				<div className="flex justify-center lg:mb-14">
 					<div className="flex items-center text-m text-var(--color-ghost-white)">
 						<span>brought to you by</span>
 						<div className="ml-2 bg-gray-800 px-3 py-1 flex items-center">
