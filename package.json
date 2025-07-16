@@ -13,10 +13,14 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.5",
-    "framer-motion": "^12.9.4",
+    "bootstrap": "^5.3.6",
+    "framer-motion": "^12.23.6",
     "lucide-react": "^0.507.0",
     "react": "^19.0.0",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^19.0.0",
+    "react-icons": "^5.5.0",
+    "react-markdown": "^10.1.0",
     "swiper": "^11.2.8",
     "txt-shuffle": "^1.0.3"
   },

@@ -1,0 +1,78 @@
+[
+  {
+    "key": "cad",
+    "icon": "Box",
+    "title": "CAD",
+    "description": "Design and model the robot using computer-aided design software.\n\nadd text here",
+    "skills": [
+      "skill 1",
+      "another skill"
+    ],
+    "leadership": [
+      { "name": "add text here", "role": "add text here", "avatar": null },
+      { "name": "add text here", "role": "add text here", "avatar": null },
+      { "name": "add text here", "role": "add text here", "avatar": null }
+    ]
+  },
+  {
+    "key": "fabrication",
+    "icon": "Hammer",
+    "title": "FABRICATION",
+    "description": "Use the blueprints that CAD creates to construct the physical robot.\n\nThis sub-team features the most hands-on work, working with materials and industry level tools in our school's shop. (more details under 'Skills Learned')\n\nFabrication also builds the practice field that will be used as preparation before competition.",
+    "skills": [
+      "The use of a variety of different tools and machines, including drills, mills, lathes, plasma cutters, laser cutters, a band saw, pneumatic drills, etc.",
+      "Proper safety protocols at the metal / wood shop, minimizing bodily injury"
+    ],
+    "leadership": [
+      { "name": "Student Lead", "role": "Student Lead", "avatar": null },
+      { "name": "Student Lead", "role": "Student Lead", "avatar": null },
+      { "name": "Student Lead", "role": "Student Lead", "avatar": null },
+      { "name": "Mentor", "role": "Mentor", "avatar": null }
+    ]
+  },
+  {
+    "key": "electrical",
+    "icon": "Zap",
+    "title": "ELECTRICAL",
+    "description": "add text here",
+    "skills": [
+      "skill 1",
+      "another skill"
+    ],
+    "leadership": [
+      { "name": "add text here", "role": "add text here", "avatar": null },
+      { "name": "add text here", "role": "add text here", "avatar": null },
+      { "name": "add text here", "role": "add text here", "avatar": null }
+    ]
+  },
+  {
+    "key": "programming",
+    "icon": "Code",
+    "title": "PROGRAMMING",
+    "description": "add text here",
+    "skills": [
+      "skill 1",
+      "another skill"
+    ],
+    "leadership": [
+      { "name": "add text here", "role": "add text here", "avatar": null },
+      { "name": "add text here", "role": "add text here", "avatar": null },
+      { "name": "add text here", "role": "add text here", "avatar": null }
+    ]
+  },
+  {
+    "key": "outreach",
+    "icon": "Camera",
+    "title": "OUTREACH",
+    "description": "add text here",
+    "skills": [
+      "skill 1",
+      "another skill"
+    ],
+    "leadership": [
+      { "name": "add text here", "role": "add text here", "avatar": null },
+      { "name": "add text here", "role": "add text here", "avatar": null },
+      { "name": "add text here", "role": "add text here", "avatar": null }
+    ]
+  }
+]
