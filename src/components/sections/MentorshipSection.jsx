@@ -188,7 +188,7 @@ const MentorshipSection = () => {
 	// the text on the left side. probs dont wanna hard code this either. ill fix that later.
 	return (
 		<div className=" flex flex-col pt-2 pb-4 sm:pt-3  sm:pb-6 sm:px-12 lg:pt-4 lg:pb-8 lg:px-8">
-			<div className="max-w-screen flex-1 flex flex-col mt-0 mb-5 mx-3 md:max-w-7xl md:mx-auto">
+			<div className="max-w-screen flex-1 flex flex-col mt-0 mb-5 mx-5 md:max-w-7xl md:mx-auto">
 				{/* Main Content */}
 				{isLandscape ? (
 					<motion.div
