@@ -3,6 +3,7 @@ import InteractiveSubteamChart from "../ui/interactiveChart/InteractiveSubteamCh
 import subteamData from "../../assets/subteamInfo.json";
 import { Box, Hammer, Zap, Code, Camera } from "lucide-react";
 import { motion } from "framer-motion";
+import { contentfulClient } from "../../utils/contentful";
 
 const iconMap = {
 	Box,
@@ -40,6 +41,17 @@ const MentorshipSection = () => {
 			window.removeEventListener("orientationchange", checkOrientation);
 		};
 	}, []);
+	const fetchSubteams = async () => {
+		try {
+			const subteams = await contentfulClient.getEntries({
+				content_type: "Subteam",
+			});
+			console.log("Subteams fetched:", subteams);
+		} catch (error) {
+			console.error("Error in MentorshipSection:", error);
+		}
+	};
+  fetchSubteams();
 
 	const renderContentBoxes = (landscapeMode = false) => (
 		<div className="flex flex-col gap-4">
