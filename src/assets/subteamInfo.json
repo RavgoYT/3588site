@@ -55,9 +55,8 @@
       "another skill"
     ],
     "leadership": [
-      { "name": "add text here", "role": "add text here", "avatar": null },
-      { "name": "add text here", "role": "add text here", "avatar": null },
-      { "name": "add text here", "role": "add text here", "avatar": null }
+      { "name": "Eddy W", "role": "Lead", "avatar": null },
+      { "name": "Mark H", "role": "Mentor", "avatar": null }
     ]
   },
   {

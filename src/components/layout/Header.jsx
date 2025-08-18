@@ -94,7 +94,7 @@ export default function Header() {
 				style={{ top: scrolled ? "1.5rem" : 0 }}
 			>
 				<div className="flex flex-row items-center align-middle justify-between w-full">
-					<div className="w-10 h-1o bg-white/0 rounded-sm flex items-center justify-center">
+					<div className="w-10 h-1o bg-white/0 rounded-sm hidden items-center justify-center sm:flex">
 						<img
 							src="./images/mainlogo.svg"
 							alt="Team 3588 Logo"
