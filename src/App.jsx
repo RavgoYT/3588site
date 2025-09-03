@@ -28,7 +28,7 @@ export default function App() {
 			<Header />
 
 			{/* Main content container */}
-			<main className="pt-16 w-screen overflow-hidden">
+			<main className="md:pt-16 w-screen overflow-hidden">
 				{" "}
 				{/* Add padding top to account for fixed header */}
 				{/* Hero Section */}

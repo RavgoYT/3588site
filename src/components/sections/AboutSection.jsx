@@ -4,7 +4,7 @@ import { fadeIn } from '../../utils/animations';
 
 const AboutSection = () => {
   return (
-    <section id="about" className="pt-90 pb-35 bg-var(--color-davy-gray)">
+    <section id="about" className="pt-15 md:pt-90 pb-35 bg-var(--color-davy-gray)">
       <div className="w-5/6 container mx-auto px-8">
         <motion.div
           initial="hidden"
