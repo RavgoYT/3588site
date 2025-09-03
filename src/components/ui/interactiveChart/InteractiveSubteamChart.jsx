@@ -1,8 +1,18 @@
+import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 
 export default function InteractiveSubteamChart({ subteams, activeTeam, setActiveTeam, landscapeMode }) {
-  // Mobile detection: use window.matchMedia or a simple check
-  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches;
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 900px)').matches
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.matchMedia('(max-width: 900px)').matches);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // react-select options
   const selectOptions = subteams.map(team => ({ value: team.key, label: team.title }));

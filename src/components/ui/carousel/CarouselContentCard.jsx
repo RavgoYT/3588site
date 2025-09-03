@@ -11,7 +11,6 @@ const CarouselContentCard = ({
 	tag2,
 	tag3,
 }) => {
-	console.log("Card title: " + title);
 	return (
 		<SwiperSlide>
 			<div

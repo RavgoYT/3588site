@@ -9,14 +9,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 
-const SponsorshipCarousel = () => {
+const SponsorshipCarousel = ({levelData, setShowModal, setActiveLevelData}) => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [swiperInstance, setSwiperInstance] = useState(null);
-	const sponsorshipLevels = [
-		"TALON HATCHLING",
-		"TALON FLEDGLING",
-		"TALON FULL",
-	];
 
 	return (
 		<div className="flex flex-col items-center w-full mb-5 bg-black">
@@ -24,55 +19,45 @@ const SponsorshipCarousel = () => {
         slidesPerView={1}
 				spaceBetween={60}
 				centeredSlides={true}
-				pagination={{ clickable: true }}
 				modules={[Pagination]}
 				onSwiper={setSwiperInstance}
 				onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
-				className="mySwiper aspect-square w-[65vw]"
+				className="mySwiper w-[50vw]"
 			>
-				{sponsorshipLevels.map((title, index) => (
+				{levelData.map((level, index) => (
 					<SwiperSlide key={index}>
 						<motion.div
 							key={index}
 							initial="hidden"
 							whileInView="visible"
 							viewport={{ once: true }}
-							className="flex flex-col items-center justify-center w-full h-full"
+							className="flex flex-col items-center justify-center w-full aspect-square cursor-pointer"
+							onClick={() => {
+								setActiveLevelData(level);
+								setShowModal(true);
+							}}
 						>
 							<div
-								className="relative rounded-xl w-full h-[70vh] flex items-center justify-center mb-4 overflow-hidden"
+								className="relative rounded-xl p-2  aspect-square flex items-center justify-center mb-4 overflow-hidden"
 								style={{
 									backgroundImage:
 										"linear-gradient(to right, var(--color-navy-blue), var(--color-poppy))",
 								}}
 							>
 								<img
-									src={`/api/placeholder/${400 + index}/${400 + index}`}
-									alt={`${title} Sponsorship Level`}
-									className="w-full h-full object-cover"
+									src={level.image.fields.file.url}
+									alt={`${level.name} Sponsorship Level`}
+									className="w-full h-full object-cover aspect-square"
 								/>
-								<GradientArrows
-									onPrev={() => {
-										if (swiperInstance) {
-											swiperInstance.slidePrev();
-										}
-									}}
-									onNext={() => {
-										if (swiperInstance) {
-											swiperInstance.slideNext();
-										}
-									}}
-									prevClassName="absolute left-2 top-1/2 -translate-y-1/2 z-10 prev-arrow"
-									nextClassName="absolute right-2 top-1/2 -translate-y-1/2 z-10 next-arrow"
-								/>
+								
 							</div>
-							<h3 className="text-2xl font-display font-bold text-white text-center">{title}</h3>
+							<h3 className="text-2xl font-display font-bold text-center">{level.name}</h3>
 						</motion.div>
 					</SwiperSlide>
 				))}
 			</Swiper>
 			<SliderDots
-				count={sponsorshipLevels.length}
+				count={levelData.length}
 				active={currentSlide}
 				onDotClick={(idx) => {
 					const swiperEl = document.querySelector('.mySwiper')?.swiper;

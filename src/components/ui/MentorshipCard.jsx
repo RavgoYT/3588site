@@ -5,7 +5,7 @@ import Icons from "../../assets/Icons";
 import { Modal, Button } from "react-bootstrap";
 import ReactMarkdown from "react-markdown";
 import biographyData from "../../assets/biographyData.json";
-import BiographyCard from "./BiographyCard";
+import BiographyCard from "./BiographyModal";
 
 export const MentorshipCard = ({
 	title,

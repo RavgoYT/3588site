@@ -7,8 +7,11 @@ import "swiper/css/pagination";
 import SliderDots from "../SliderDots";
 import GradientImageFrame from "../GradientImageFrame";
 import GradientArrows from "../GradientArrows";
-import rawSlidesData from "../../../assets/carouselData.json";
 import { shuffle } from "txt-shuffle";
+import { contentfulClient } from "../../../utils/contentful";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, MARKS } from '@contentful/rich-text-types';
+
 
 // Animation variants for tags only
 const tagVariants = {
@@ -22,56 +25,89 @@ const tagVariants = {
 };
 
 // Custom component to handle text shuffling
-const TextShuffle = ({ text, className, style, duration, animation, direction, glyphs, delay }) => {
-  const [displayText, setDisplayText] = useState(text);
-  const cancelRef = React.useRef(null);
+const TextShuffle = ({
+	text,
+	className,
+	style,
+	duration,
+	animation,
+	direction,
+	glyphs,
+	delay,
+}) => {
+	const [displayText, setDisplayText] = useState(text);
+	const cancelRef = React.useRef(null);
 
-  useEffect(() => {
-    // Cancel any ongoing shuffle before starting a new one
-    if (cancelRef.current) {
-      cancelRef.current();
-      cancelRef.current = null;
-    }
-    // Reset displayText only *after* cancelling previous shuffle
-    setDisplayText("");
+	useEffect(() => {
+		// Cancel any ongoing shuffle before starting a new one
+		if (cancelRef.current) {
+			cancelRef.current();
+			cancelRef.current = null;
+		}
+		// Reset displayText only *after* cancelling previous shuffle
+		setDisplayText("");
 
-    const cancel = shuffle({
-      text,
-      duration,
-      fps: 60,
-      glyphs: glyphs || "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:',.<>?/~`",
-      animation,
-      direction,
-      delayResolve: delay || 0,
-      onUpdate: (output) => setDisplayText(output),
-    });
+		const cancel = shuffle({
+			text,
+			duration,
+			fps: 60,
+			glyphs:
+				glyphs ||
+				"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+[]{}|;:',.<>?/~`",
+			animation,
+			direction,
+			delayResolve: delay || 0,
+			onUpdate: (output) => setDisplayText(output),
+		});
 
-    cancelRef.current = cancel;
+		cancelRef.current = cancel;
 
-    // Cleanup on unmount or before next effect run
-    return () => {
-      if (cancelRef.current) {
-        cancelRef.current();
-        cancelRef.current = null;
-      }
-    };
-  }, [text, duration, animation, direction, glyphs, delay]);
+		// Cleanup on unmount or before next effect run
+		return () => {
+			if (cancelRef.current) {
+				cancelRef.current();
+				cancelRef.current = null;
+			}
+		};
+	}, [text, duration, animation, direction, glyphs, delay]);
 
-  return (
-    <span className={className} style={style}>
-      {displayText}
-    </span>
-  );
+	return (
+		<span className={className} style={style}>
+			{displayText}
+		</span>
+	);
 };
-
 
 const ContentCarousel = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [swiperInstance, setSwiperInstance] = useState(null);
-	const mobileWidth = window.innerWidth * .60;
+	const [slides, setSlides] = useState([]);
+	const mobileWidth = window.innerWidth * 0.6;
 	const mobileHeight = mobileWidth * 0.5625;
 
-	const slides = rawSlidesData.slides ?? [];
+	useEffect(() => {
+		const fetchContent = async () => {
+			("Fetching content from Contentful...");
+			try {
+				const entries = await contentfulClient.getEntries({
+					content_type: "newsfeedSlide",
+				});
+				const slideData = entries.items.map((slide) => ({
+					key: slide.fields.title,
+					title: slide.fields.title,
+					description: slide.fields.description,
+					image: slide.fields.slideImage.fields.file.url,
+					tags: slide.fields.tags || [],
+				}));
+				setSlides(slideData);
+			} catch (error) {
+				console.error("Error fetching data from Contentful:", error);
+				return [];
+			}
+		};
+		fetchContent();
+	}, []);
+
 
 	const goToSlide = (index) => {
 		if (swiperInstance) {
@@ -97,6 +133,8 @@ const ContentCarousel = () => {
 		}
 	};
 
+
+
 	const getTagColor = (tag, index) => {
 		const colors = [
 			"bg-[#6687c8] text-white",
@@ -113,7 +151,7 @@ const ContentCarousel = () => {
 		return colors[index % colors.length];
 	};
 
-	if (slides.length === 0) return null;
+	if (!slides || slides.length === 0) return null;
 
 	return (
 		<div className="w-full bg-black text-white flex justify-center items-center py-8">
@@ -126,7 +164,7 @@ const ContentCarousel = () => {
 									modules={[Autoplay]}
 									spaceBetween={0}
 									slidesPerView={1}
-									autoplay={{ delay: 8000, disableOnInteraction: false }}
+									autoplay={{ delay: 8000, disableOnInteraction: true }}
 									onSwiper={setSwiperInstance}
 									onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
 									className="aspect-3/2 w-[85vw] md:w-[40vw] max-w-[500px] lg:max-w-[650px]"
@@ -197,56 +235,56 @@ const ContentCarousel = () => {
 							/>
 						</h3>
 
-						<p
+						<div
 							className="text-gray-300 leading-relaxed text-xl max-w-2xl"
 							style={{ fontFamily: "TTNorms" }}
 						>
-							<TextShuffle
-								text={slides[currentSlide].description}
+							{/* <TextShuffle
+								text={}
 								style={{ fontFamily: "TTNorms" }}
 								duration={Math.min(
 									4,
-									0.3462 + 0.01923 * (slides[currentSlide].description?.length || 0)
+									0.3462 +
+										0.01923 * (slides[currentSlide].description?.length || 0)
 								)}
 								animation="stay"
 								direction="right"
 								glyphs="_"
 								delay={0}
-							/>
-						</p>
+							/> */}
+							{documentToReactComponents(slides[currentSlide].description)}
+						</div>
 
 						<div className="space-y-3">
 							<div className="text-sm font-bold uppercase tracking-wider text-white">
 								<TextShuffle text="TAGS" style={{ fontFamily: "HK Modular" }} />
 							</div>
 							<div className="flex flex-wrap gap-3">
-								{Object.entries(slides[currentSlide])
-									.filter(([key, value]) => key.startsWith("tag") && value)
-									.map(([key, tag], index) => (
-										<motion.span
-											key={`${currentSlide}-${index}`}
-											custom={index}
-											variants={tagVariants}
-											initial="initial"
-											animate="animate"
-											exit="exit"
-											className={`px-4 py-2 text-sm font-bold uppercase rounded-lg ${getTagColor(
-												tag,
-												index
-											)}`}
+								{slides[currentSlide].tags.map((tag, index) => (
+									<motion.span
+										key={`${currentSlide}-${index}`}
+										custom={index}
+										variants={tagVariants}
+										initial="initial"
+										animate="animate"
+										exit="exit"
+										className={`px-4 py-2 text-sm font-bold uppercase rounded-lg ${getTagColor(
+											tag,
+											index
+										)}`}
+										style={{ fontFamily: "HK Modular" }}
+									>
+										<TextShuffle
+											text={tag}
 											style={{ fontFamily: "HK Modular" }}
-										>
-											<TextShuffle
-												text={tag}
-												style={{ fontFamily: "HK Modular" }}
-												duration={1.5}
-												animation="stay"
-												direction="random"
-												glyphs="###"
-												delay="0.3"
-											/>
-										</motion.span>
-									))}
+											duration={0.8}
+											animation="stay"
+											direction="random"
+											glyphs="###"
+											delay={0.2}
+										/>
+									</motion.span>
+								))}
 							</div>
 						</div>
 					</div>

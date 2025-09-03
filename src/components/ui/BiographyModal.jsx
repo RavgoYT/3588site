@@ -1,7 +1,8 @@
 import React from "react";
 import GradientImageFrame from "./GradientImageFrame";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-const BiographyCard = ({ name, description, imageUrl }) => {
+const BiographyModal = ({ name, description, imageUrl }) => {
 	return (
 		<div
 			className="rounded-3xl p-1.5 inline-block"
@@ -22,7 +23,7 @@ const BiographyCard = ({ name, description, imageUrl }) => {
 
 					<div className="mt-2 flex flex-col justify-center md:mt-0 md:ml-4 md:items-start">
 						<h3 className="sm:text-center text-md text-center font-semibold text-gray-600 md:text-left">{name}</h3>
-						<p className="text-center text-sm text-white-600">{description}</p>
+						<div className="text-center text-sm text-white-600">{documentToReactComponents(description)}</div>
 					</div>
 				</div>
 			</div>
@@ -30,4 +31,4 @@ const BiographyCard = ({ name, description, imageUrl }) => {
 	);
 };
 
-export default BiographyCard;
+export default BiographyModal;

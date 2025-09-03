@@ -5,9 +5,9 @@ import React from 'react';
  * @param {Object} props
  * @param {string} [props.title] - Optional title to display in the divider
  */
-const SectionDivider = ({ title }) => {
+const SectionDivider = ({ title, id }) => {
   return (
-    <div className="w-screen py-8 flex items-center justify-center">
+    <div className="w-screen py-8 flex items-center justify-center" id={id}>
       {/* Adjust border width here */}
       <div className="w-1/3 border-t-4 border-dashed border-var(--color-ghost-white)"></div>
       {title && (

@@ -1,28 +1,78 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../utils/animations";
 import SponsorshipCarousel from "../ui/carousel/SponsorshipCarousel";
+import { contentfulClient } from "../../utils/contentful";
+import { Modal, Button } from "react-bootstrap";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+
 
 const SponsorshipSection = () => {
-	const sponsorshipLevels = [
-		"TALON HATCHLING",
-		"TALON FLEDGLING",
-		"TALON FULL",
-	];
+	const [sponsorshipLevels, setSponsorshipLevels] = useState([])
+	const [showModal, setShowModal] = useState(false);
+	const [activeLevelData, setActiveLevelData] = useState([]);
 
+
+	useEffect(() => {
+			const fetchContent = async () => {
+				try {
+					const entries = await contentfulClient.getEntries({
+						content_type: "sponsorshipLevel",
+					});
+					const subteamData = entries.items.map((item) => ({
+						...item.fields,
+						key: item.fields.name.toLowerCase(),
+					}));
+					setSponsorshipLevels(subteamData);
+				} catch (error) {
+					console.error("Error fetching data from Contentful:", error);
+					return [];
+				}
+			};
+			fetchContent();
+		}, []);
+	
+		console.log(sponsorshipLevels)
 	return (
-		<section id="sponsors" className="py-20">
+		<section id="sponsors" className="md:py-20">
+			<Modal
+				className="bg-gray-900/50"
+				dialogClassName="modal-fullscreen rounded-modal"
+				data-bs-theme="dark"
+				show={showModal}
+				backdrop={true}
+				onHide={() => setShowModal(false)}
+				centered
+			>
+				<Modal.Header closeButton>
+					<Modal.Title className="">{activeLevelData?.name}</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					{documentToReactComponents(activeLevelData?.description)}
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={() => setShowModal(false)}>
+						Close
+					</Button>
+				</Modal.Footer>
+			</Modal>
+
+
 			<div className="container mx-auto px-8">
 				{/* Horizontal sponsorship levels */}
 				<div className="hidden md:flex flex-wrap justify-center gap-8 mb-8">
-					{sponsorshipLevels.map((title, index) => (
+					{sponsorshipLevels.map((level, index) => (
 						<motion.div
 							key={index}
 							initial="hidden"
 							whileInView="visible"
 							viewport={{ once: true }}
 							variants={fadeIn}
-							className="flex flex-col items-center"
+							className="flex flex-col items-center cursor-pointer"
+							onClick={() => {
+								setActiveLevelData(level);
+								setShowModal(true);
+							}}
 						>
 							<div
 								className="rounded-xl w-64 h-64 flex items-center justify-center mb-4 overflow-hidden"
@@ -32,17 +82,17 @@ const SponsorshipSection = () => {
 								}}
 							>
 								<img
-									src={`/api/placeholder/${400 + index}/${400 + index}`}
-									alt={`${title} Sponsorship Level`}
+									src={level.image.fields.file.url}
+									alt={`${level.name} Sponsorship Level`}
 									className="w-screen h-full object-cover"
 								/>
 							</div>
-							<h3 className="text-lg font-display font-bold">{title}</h3>
+							<h3 className="text-lg font-display font-bold">{level.name}</h3>
 						</motion.div>
 					))}
 				</div>
 				<div className="md:hidden">
-					<SponsorshipCarousel />
+					<SponsorshipCarousel levelData={sponsorshipLevels} setShowModal={setShowModal} setActiveLevelData={setActiveLevelData} />
 				</div>
 
 				<div className="text-center max-w-3xl mx-auto">

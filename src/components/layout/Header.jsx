@@ -27,7 +27,7 @@ export default function Header() {
 	const [menuOpen, setMenuOpen] = useState(false); // Hamburger menu state
 	const headerRef = useRef(null);
 
-	const sections = ["home", "about", "newsfeed", "sponsors", "contact"];
+	const sections = ["home", "about", "newsfeed", "sponsors","subteams", "mentors", "contact"];
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -88,7 +88,7 @@ export default function Header() {
 			{/* Mobile NavBar */}
 			<header
 				ref={headerRef}
-				className={`fixed min-[1150px]:hidden left-1/2 transform -translate-x-1/2 w-full max-w-[75%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-lg bg-gradient-to-r from-[var(--color-navy-blue)]/60 to-[var(--color-poppy)]/60 ${
+				className={`fixed min-[1150px]:hidden left-1/2 transform -translate-x-1/2 w-full max-w-[90%] sm:max-w-[75%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-lg bg-gradient-to-r from-[var(--color-navy-blue)]/60 to-[var(--color-poppy)]/60 ${
 					scrolled ? "py-4 px-8" : "py-4 px-8"
 				}`}
 				style={{ top: scrolled ? "1.5rem" : 0 }}
@@ -101,7 +101,7 @@ export default function Header() {
 							className="h-full w-auto"
 						/>
 					</div>
-					<h1 className="uppercase !text-2xl !mb-0">Team 3588</h1>
+					<h1 className="uppercase !text-xl !mb-0">Team 3588</h1>
 					<HamburgerMenu onClick={() => setMenuOpen(true)} />
 				</div>
 			</header>
