@@ -312,7 +312,7 @@ const SubteamSection = () => {
 							<InteractiveSubteamChart
 								subteams={SUBTEAM_KEYS}
 								activeTeam={activeTeam}
-								setActiveTeam={setActiveTeam}
+								setActiveTeam={changeActiveTeam}
 								landscapeMode={false}
 							/>
 							{renderContentBoxes(false)}

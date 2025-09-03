@@ -28,6 +28,7 @@ export default function InteractiveSubteamChart({ subteams, activeTeam, setActiv
             value={selectedOption}
             onChange={opt => setActiveTeam(opt.value)}
             classNamePrefix="react-select"
+            isSearchable={false}
             menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
             styles={{
               control: (base) => ({ ...base, background: 'linear-gradient(90deg, #6586c7, #e23942)', color: 'white', borderRadius: '8px', border: 'none', minHeight: '48px' }),
