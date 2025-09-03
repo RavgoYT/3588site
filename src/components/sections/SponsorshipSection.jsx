@@ -32,7 +32,6 @@ const SponsorshipSection = () => {
 			fetchContent();
 		}, []);
 	
-		console.log(sponsorshipLevels)
 	return (
 		<section id="sponsors" className="md:py-20">
 			<Modal

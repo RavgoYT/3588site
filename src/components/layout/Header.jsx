@@ -107,7 +107,7 @@ export default function Header() {
 			</header>
 			{/* Desktop NavBar */}
 			<header
-				className={`hidden min-[1150px]:block fixed left-1/2 transform -translate-x-1/2 w-full max-w-[75%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-lg bg-gradient-to-r from-[var(--color-navy-blue)]/60 to-[var(--color-poppy)]/60 ${
+				className={`hidden min-[1150px]:block fixed left-1/2 transform -translate-x-1/2 w-full max-w-[90%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-lg bg-gradient-to-r from-[var(--color-navy-blue)]/60 to-[var(--color-poppy)]/60 ${
 					scrolled ? "py-4 px-8" : "py-4 px-8"
 				}`}
 				style={{ top: scrolled ? "1.5rem" : 0 }}
