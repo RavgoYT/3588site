@@ -1,25 +1,43 @@
-import React from 'react';
-import { Instagram, Youtube, Mail } from 'lucide-react';
+import React from "react";
+import { Instagram, Youtube, Mail } from "lucide-react";
 
 const ContactSection = () => {
-  return (
-    <section id="contact" className="py-12 bg-black">
-      <div className="container mx-auto px-8 text-center">
-        <div className="flex justify-center space-x-6">
-          <a href="#" className="hover:text-blue-400 transition">
-            <Instagram size={24} />
-          </a>
-          <a href="#" className="hover:text-red-400 transition">
-            <Youtube size={24} />
-          </a>
-          <a href="#" className="hover:text-blue-400 transition">
-            <Mail size={24} />
-          </a>
-        </div>
-        <p className="mt-4 text-gray-400">Email us for inquiries and check out our socials!</p>
-      </div>
-    </section>
-  );
+	return (
+		<section id="contact" className="pb-5 bg-black">
+			<div className="container mx-auto px-8 text-center flex flex-row justify-center gap-8">
+				<a
+					href="mailto:projectmanager@lindberghrobotics.org"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="min-w-[200px] mt-6 inline-block px-8 py-4 rounded-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+					style={{
+						background: "linear-gradient(90deg, #6586c7, #e23942)",
+						letterSpacing: "0.1em",
+					}}
+				>
+					<div className="flex flex-row justify-center gap-3">
+						<Mail />
+						EMAIL
+					</div>
+				</a>
+        <a
+					href="https://www.instagram.com/lhseagles_robotics?utm_source=ig_web_button_share_sheet&igsh=dnJkcHJqenI1bWxt"
+					target="_blank"
+					rel="noopener noreferrer"
+					className="mt-6 inline-block min-w-[200px] px-8 py-4 rounded-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
+					style={{
+						background: "linear-gradient(90deg, #6586c7, #e23942)",
+						letterSpacing: "0.1em",
+					}}
+				>
+					<div className="flex flex-row gap-3 justify-center">
+						<Instagram />
+						Instagram
+					</div>
+				</a>
+			</div>
+		</section>
+	);
 };
 
 export default ContactSection;
