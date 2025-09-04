@@ -1,6 +1,6 @@
 import React, { useState, useEffect, act } from "react";
 import InteractiveSubteamChart from "../ui/interactiveChart/InteractiveSubteamChart";
-import { Box, Hammer, Zap, Code, Camera } from "lucide-react";
+import { Box, Hammer, Zap, Code, Camera, Clipboard } from "lucide-react";
 import { motion } from "framer-motion";
 import { contentfulClient } from "../../utils/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -8,6 +8,7 @@ import { sub } from "framer-motion/client";
 import { Modal, Button } from "react-bootstrap";
 
 const iconMap = {
+	Clipboard,
 	Box,
 	Hammer,
 	Zap,
@@ -24,6 +25,7 @@ const SubteamSection = () => {
 	const [activeLead, setActiveLead] = useState({});
 
 	const SUBTEAM_KEYS = [
+		{ key: "pm", title: "PM", icon: <Clipboard size="45" /> },
 		{ key: "cad", title: "CAD", icon: <Box size="45" /> },
 		{ key: "programming", title: "Programming", icon: <Code size="45" /> },
 		{ key: "electrical", title: "Electrical", icon: <Zap size="45" /> },
