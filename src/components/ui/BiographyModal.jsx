@@ -1,34 +1,58 @@
-import React from "react";
-import GradientImageFrame from "./GradientImageFrame";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-
-const BiographyModal = ({ name, description, imageUrl }) => {
+import React from 'react'
+import { Modal, Button } from "react-bootstrap";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+const BiographyModal = ({showModal, setShowModal, activeLead}) => {
 	return (
-		<div
-			className="rounded-3xl p-1.5 inline-block"
-			style={{
-				backgroundImage:
-					"linear-gradient(to right, var(--color-navy-blue), var(--color-poppy))",
-			}}
+		<Modal
+			className="bg-gray-900/50"
+			dialogClassName="modal-fullscreen rounded-modal"
+			data-bs-theme="dark"
+			show={showModal}
+			backdrop={true}
+			onHide={() => setShowModal(false)}
+			centered
 		>
-			<div className="rounded-2xl">
-				<div className="flex flex-col md:flex-row items-center p-3 bg-gray-800 rounded-2xl overflow-hidden">
-					<div className="flex-shrink-0 w-20 h-20 rounded-full overflow-hidden border-4 border-white">
-						<img
-							src={imageUrl}
-							alt={`${name}'s profile`}
-							className="w-full h-full object-cover"
-						/>
-					</div>
-
-					<div className="mt-2 flex flex-col justify-center md:mt-0 md:ml-4 md:items-start">
-						<h3 className="sm:text-center text-md text-center font-semibold text-gray-600 md:text-left">{name}</h3>
-						<div className="text-center text-sm text-white-600">{documentToReactComponents(description)}</div>
-					</div>
+			{/* BORDER */}
+			<div
+				className="relative rounded-xl p-[2px]"
+				style={{
+					background: "linear-gradient(90deg, #6586c7, #e23942)",
+				}}
+			>
+				<div className="bg-gray-900/90 rounded-xl">
+					<Modal.Header closeButton>
+						<div
+							className="w-24 h-24 rounded-full  mr-5 flex items-center justify-center cursor-pointer"
+							style={{
+								background: "linear-gradient(90deg, #6586c7, #e23942)",
+							}}
+						>
+							{activeLead.picture ? (
+								<img
+									src={activeLead.picture.fields.file.url}
+									alt={activeLead.name}
+									className="w-full h-full rounded-full object-cover"
+								/>
+							) : (
+								<div className="w-full h-full rounded-full bg-gray-300"></div>
+							)}
+						</div>
+						<Modal.Title className="">
+							{activeLead?.name} - {activeLead?.role}
+						</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						{documentToReactComponents(activeLead?.biography)}
+					</Modal.Body>
+					<Modal.Footer>
+						<Button variant="secondary" onClick={() => setShowModal(false)}>
+							Close
+						</Button>
+					</Modal.Footer>
 				</div>
 			</div>
-		</div>
-	);
-};
+		</Modal>
+	)
+}
 
-export default BiographyModal;
+export default BiographyModal

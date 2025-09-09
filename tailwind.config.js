@@ -3,7 +3,7 @@
 
 export default {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  important: true,
+	important: true,
 	theme: {
 		extend: {
 			spacing: {
@@ -14,6 +14,15 @@ export default {
 				hk: ["HK Modular"],
 			},
 			listStyle: "disc",
+			keyframes: {
+				shine: {
+					'0%': { 'background-position': '100%' },
+					'100%': { 'background-position': '-100%' },
+				},
+			},
+			animation: {
+				shine: 'shine 5s linear infinite',
+			},
 		},
 	},
 };

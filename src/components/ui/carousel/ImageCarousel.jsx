@@ -154,7 +154,7 @@ const ContentCarousel = () => {
 	if (!slides || slides.length === 0) return null;
 
 	return (
-		<div className="w-full bg-black text-white flex justify-center items-center py-8">
+		<div className="w-full text-white flex justify-center items-center py-8 z-20">
 			<div className="w-full max-w-7xl mx-auto px-4 mr-13">
 				<div className="flex flex-col md:flex-row gap-10 items-center md:items-center">
 					<div className="flex-shrink-0 relative">

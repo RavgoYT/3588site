@@ -1,13 +1,24 @@
 import React from "react";
-import SliderDots from "../ui/SliderDots";
-import GradientFrame from "../ui/GradientFrame";
-import GradientImageFrame from "../ui/GradientImageFrame";
+import PixelBlast from "../ui/backgrounds/PixelBlast";
 import ContentCarousel from "../ui/carousel/ImageCarousel";
 
 const NewsfeedSection = () => {
 	return (
-		<section id="newsfeed" className="py-0 bg-black h-full">
-			<div className="container mx-auto px-8">
+		<section id="newsfeed" className="py-0 bg-black h-full relative overflow-hidden">
+			<div className="absolute inset-0 -z-0">
+				<PixelBlast variant="square"
+					pixelSize={4}
+					color="#5884D5"
+					patternScale={3}
+					patternDensity={0.3}
+					pixelSizeJitter={0}
+					speed={0.5}
+					edgeFade={0.25}
+					transparent
+
+				/>
+			</div>
+			<div className="relative container mx-auto px-8 z-10">
 				{/* "Brought to you by" with logo */}
 				<div className="flex justify-center lg:mb-14">
 					<div className="flex items-center text-m text-var(--color-ghost-white)">
@@ -21,41 +32,8 @@ const NewsfeedSection = () => {
 						</div>
 					</div>
 				</div>
-        <ContentCarousel />
-				{/* News Image Slider */}
-				{/* <div className="max-w-2xl mx-auto">
-					
-					<motion.div
-						initial="hidden"
-						whileInView="visible"
-						viewport={{ once: true }}
-						variants={fadeIn}
-						className="mb-8"
-					>
-            <GradientImageFrame src={"https://picsum.photos/672/368"} alt="News Image" />
-						<SliderDots count={5} active={0} />
-					</motion.div>
+				<ContentCarousel />
 
-					<div className="bg-black/50 p-4 rounded">
-						<p className="mb-4 italic">
-							Lindbergh students recently attended the Seattle FanExpo to
-							present their robot and let the community learn about how it
-							works. Click the screen for our media gallery of the event!
-						</p>
-						<div className="flex flex-wrap gap-2">
-							<span className="bg-blue-900 px-2 py-1 text-xs rounded-md font-mono">
-								TAGS
-							</span>
-							<span className="bg-purple-900 px-2 py-1 text-xs rounded-md font-mono">
-								ON INSTAGRAM
-							</span>
-							<span className="bg-team-red-900 px-2 py-1 text-xs rounded-md font-mono">
-								SUMMER EVENT
-							</span>
-						</div>
-					</div>
-				</div> 
-        */}
 			</div>
 		</section>
 	);

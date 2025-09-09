@@ -9,7 +9,6 @@ import SponsorshipSection from "./components/sections/SponsorshipSection";
 import SubteamSection from "./components/sections/SubteamSection";
 import ContactSection from "./components/sections/ContactSection";
 import MentorshipSection from "./components/sections/MentorshipSection.jsx";
-
 export default function App() {
 	const [scrollY, setScrollY] = useState(0);
 
@@ -29,6 +28,7 @@ export default function App() {
 
 			{/* Main content container */}
 			<main className="md:pt-16 w-screen overflow-hidden">
+
 				{" "}
 				{/* Add padding top to account for fixed header */}
 				{/* Hero Section */}

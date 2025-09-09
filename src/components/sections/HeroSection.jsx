@@ -59,9 +59,9 @@ const HeroSection = ({ scrollY }) => {
 							style={{
 								...(heroSectionContent?.useTagLineBackgroundMobile
 									? {
-											backgroundImage:
-												"linear-gradient(to right, var(--color-navy-blue), var(--color-poppy))",
-									  }
+										backgroundImage:
+											"linear-gradient(to right, var(--color-navy-blue), var(--color-poppy))",
+									}
 									: {}),
 							}}
 						>
@@ -82,7 +82,7 @@ const HeroSection = ({ scrollY }) => {
 	return (
 		<section
 			id="home"
-			className="relative h-screen flex items-center justify-center"
+			className="relative h-screen flex items-center justify-center pb-15 md:pb-90"
 		>
 			<div className="absolute inset-0 z-0">{/* No gradient background */}</div>
 			<div
@@ -93,7 +93,7 @@ const HeroSection = ({ scrollY }) => {
 				}}
 			>
 				<div className="text-center">
-					<div className="mb-0 md:pt-32 lg:pt-62 xl:pt-75">
+					<div className="mb-0 md:pt-32 lg:pt-40 xl:pt-40 2xl-pt:75">
 						<div className="w-screen mx-auto bg-black flex items-center justify-center overflow-hidden">
 							<img
 								src={heroSectionContent?.desktopHeroImage?.fields?.file.url}
@@ -101,14 +101,14 @@ const HeroSection = ({ scrollY }) => {
 								className="w-screen h-full object-cover"
 							/>
 							<div className="absolute left-1/2 top-[79%] -translate-x-1/2 -translate-y-1/2 text-center">
-								<p className="text-2xl uppercase md:text-3xl lg:text-4xl xl:text-6xl font-[TTNorms] tracking-[1rem] md:tracking-[2rem] text-white text-center p-3 rounded-2xl" style={{
-								...(heroSectionContent?.tagLineBackground
-									? {
+								<p className="text-2xl uppercase md:text-3xl lg:text-4xl xl:text-6xl font-[TTNorms] tracking-[1rem] md:tracking-[2rem] text-center p-3 rounded-2xl pb-10" style={{
+									...(heroSectionContent?.tagLineBackground
+										? {
 											backgroundImage:
 												"linear-gradient(to right, var(--color-navy-blue), var(--color-poppy))",
-									  }
-									: {}),
-							}}>
+										}
+										: {}),
+								}}>
 									{heroSectionContent?.tagLine}
 								</p>
 							</div>

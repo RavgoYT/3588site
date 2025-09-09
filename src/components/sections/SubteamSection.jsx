@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { contentfulClient } from "../../utils/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { sub } from "framer-motion/client";
-import { Modal, Button } from "react-bootstrap";
+import BiographyModal from "../ui/BiographyModal";
 
 const iconMap = {
 	Clipboard,
@@ -77,9 +77,8 @@ const SubteamSection = () => {
 		<div className="flex flex-col gap-4">
 			{/* These r the description and skills boxes */}
 			<motion.div
-				className={`flex ${
-					landscapeMode ? "gap-6" : "flex-col md:flex-row gap-4 md:gap-6"
-				}`}
+				className={`flex ${landscapeMode ? "gap-6" : "flex-col md:flex-row gap-4 md:gap-6"
+					}`}
 				initial={{ opacity: 0, y: 40, scale: 0.95 }}
 				whileInView={{ opacity: 1, y: 0, scale: 1 }}
 				viewport={{ once: true, amount: 0.3 }}
@@ -97,14 +96,12 @@ const SubteamSection = () => {
 					transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
 				>
 					<div
-						className={`${
-							landscapeMode ? "p-6" : "p-4 sm:p-6"
-						} h-full flex flex-col`}
+						className={`${landscapeMode ? "p-6" : "p-4 sm:p-6"
+							} h-full flex flex-col`}
 					>
 						<h3
-							className={`${
-								landscapeMode ? "text-lg" : "text-base sm:text-lg"
-							} font-bold mb-4 text-white tracking-wide`}
+							className={`${landscapeMode ? "text-lg" : "text-base sm:text-lg"
+								} font-bold mb-4 text-white tracking-wide`}
 							style={{ fontFamily: "HK Modular, sans-serif" }}
 						>
 							DESCRIPTION
@@ -130,14 +127,12 @@ const SubteamSection = () => {
 					transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
 				>
 					<div
-						className={`${
-							landscapeMode ? "p-6" : "p-4 sm:p-6"
-						} h-full flex flex-col`}
+						className={`${landscapeMode ? "p-6" : "p-4 sm:p-6"
+							} h-full flex flex-col`}
 					>
 						<h3
-							className={`${
-								landscapeMode ? "text-lg" : "text-base sm:text-lg"
-							} font-bold mb-4 text-white tracking-wide`}
+							className={`${landscapeMode ? "text-lg" : "text-base sm:text-lg"
+								} font-bold mb-4 text-white tracking-wide`}
 							style={{ fontFamily: "HK Modular, sans-serif" }}
 						>
 							SKILLS
@@ -166,9 +161,8 @@ const SubteamSection = () => {
 			>
 				<div className={`${landscapeMode ? "p-6" : "p-4 sm:p-6"}`}>
 					<h3
-						className={`${
-							landscapeMode ? "text-lg" : "text-base sm:text-lg"
-						} font-bold mb-16 text-white tracking-wide pl-1`}
+						className={`${landscapeMode ? "text-lg" : "text-base sm:text-lg"
+							} font-bold mb-16 text-white tracking-wide pl-1`}
 						style={{ fontFamily: "HK Modular, sans-serif" }}
 					>
 						SUB-TEAM LEADERSHIP
@@ -224,47 +218,10 @@ const SubteamSection = () => {
 
 	// the text on the left side. probs dont wanna hard code this either. ill fix that later.
 	return (
-		<>
-			<Modal
-				className="bg-gray-900/50"
-				dialogClassName="modal-fullscreen rounded-modal"
-				data-bs-theme="dark"
-				show={showModal}
-				backdrop={true}
-				onHide={() => setShowModal(false)}
-				centered
-			>
-				<Modal.Header closeButton>
-					<div
-						className="w-24 h-24 rounded-full  mr-5 flex items-center justify-center cursor-pointer"
-						style={{
-							background: "linear-gradient(90deg, #6586c7, #e23942)",
-						}}
-					>
-						{activeLead.picture ? (
-							<img
-								src={activeLead.picture.fields.file.url}
-								alt={activeLead.name}
-								className="w-full h-full rounded-full object-cover"
-							/>
-						) : (
-							<div className="w-full h-full rounded-full bg-gray-300"></div>
-						)}
-					</div>
-					<Modal.Title className="">
-						{activeLead?.name} - {activeLead?.role}
-					</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					{documentToReactComponents(activeLead?.biography)}
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={() => setShowModal(false)}>
-						Close
-					</Button>
-				</Modal.Footer>
-			</Modal>
-			<div className="flex flex-col pt-2 pb-4 px-8 sm:pt-3 sm:pb-6 sm:px-15 lg:pt-4 lg:pb-8 lg:px-8 items-center">
+		<div className="relative">
+
+			<BiographyModal activeLead={activeLead} setShowModal={setShowModal} showModal={showModal} />
+			<div className="relative flex flex-col pt-2 pb-4 px-8 sm:pt-3 sm:pb-6 sm:px-15 lg:pt-4 lg:pb-8 lg:px-8 items-center">
 				<div className="max-w-screen flex-1 flex flex-col mt-0 mb-5 mx-5 md:max-w-7xl md:mx-auto w-full items-center justify-center">
 					{/* Main Content */}
 					{isLandscape ? (
@@ -379,7 +336,7 @@ const SubteamSection = () => {
 					)}
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 
