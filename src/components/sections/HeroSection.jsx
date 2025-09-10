@@ -37,7 +37,7 @@ const HeroSection = ({ scrollY }) => {
 		return (
 			<section
 				id="home"
-				className="flex flex-col items-center justify-start bg-black"
+				className="relative h-screen flex items-center justify-center bg-black"
 			>
 				{/* <div className="w-full text-center">
           <p className="text-xl uppercase font-[TTNorms] tracking-[0.5rem] text-white">
@@ -82,7 +82,7 @@ const HeroSection = ({ scrollY }) => {
 	return (
 		<section
 			id="home"
-			className="relative h-screen flex items-center justify-center pb-15 md:pb-90"
+			className="relative h-screen flex items-center justify-center pb-15 md:pb-120 overflow-hidden"
 		>
 			<div className="absolute inset-0 z-0">{/* No gradient background */}</div>
 			<div
@@ -98,7 +98,7 @@ const HeroSection = ({ scrollY }) => {
 							<img
 								src={heroSectionContent?.desktopHeroImage?.fields?.file.url}
 								alt="Team 3588 Robot"
-								className="w-screen h-full object-cover"
+								className="w-screen h-full object-cover fixed top-0 left-0 z-0"
 							/>
 							<div className="absolute left-1/2 top-[79%] -translate-x-1/2 -translate-y-1/2 text-center">
 								<p className="text-2xl uppercase md:text-3xl lg:text-4xl xl:text-6xl font-[TTNorms] tracking-[1rem] md:tracking-[2rem] text-center p-3 rounded-2xl pb-10" style={{

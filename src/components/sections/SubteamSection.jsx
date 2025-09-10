@@ -1,23 +1,18 @@
-import React, { useState, useEffect, act } from "react";
+import React, { useState, useEffect } from "react";
 import InteractiveSubteamChart from "../ui/interactiveChart/InteractiveSubteamChart";
 import { Box, Hammer, Zap, Code, Camera, Clipboard } from "lucide-react";
-import { motion } from "framer-motion";
 import { contentfulClient } from "../../utils/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { sub } from "framer-motion/client";
 import BiographyModal from "../ui/BiographyModal";
-
-const iconMap = {
-	Clipboard,
-	Box,
-	Hammer,
-	Zap,
-	Code,
-	Camera,
-};
+import Waves from "../ui/backgrounds/Waves";
+import Beams from "../ui/backgrounds/Beams";
+import LetterGlitch from "../ui/backgrounds/LetterGlitch";
+import Lightning from "../ui/backgrounds/Lightning";
+import BallPit from "../ui/backgrounds/BallPit";
+import Squares from "../ui/backgrounds/Squares";
 
 const SubteamSection = () => {
-	const [activeTeam, setActiveTeam] = useState("cad");
+	const [activeTeam, setActiveTeam] = useState("pm");
 	const [activeTeamData, setActiveTeamData] = useState(null);
 	const [isLandscape, setIsLandscape] = useState(false);
 	const [subteams, setSubteams] = useState();
@@ -73,22 +68,92 @@ const SubteamSection = () => {
 		};
 	}, []);
 
+	const backgroundEffect = () => {
+		switch (activeTeam) {
+			case "cad":
+				return (
+					<Beams
+						beamWidth={2}
+						beamHeight={10}
+						beamNumber={15}
+						lightColor="#ffffff"
+						speed={2}
+						noiseIntensity={1.75}
+						scale={0.2}
+						rotation={30}
+					/>
+				);
+			case "programming":
+				return (
+					<LetterGlitch
+						glitchSpeed={50}
+						centerVignette={true}
+						outerVignette={false}
+						smooth={true}
+					/>
+				);
+
+			case "electrical":
+				return (
+					<Lightning hue={220} xOffset={0} speed={1} intensity={1} size={1} />
+				);
+			case "outreach":
+				return (
+					<BallPit
+						count={50}
+						gravity={0.01}
+						friction={0.9975}
+						wallBounce={0.9975}
+						followCursor={true}
+						colors={["#e23942", "#3f71cf", "#0d4b7b"]}
+					/>
+				);
+			case "fab":
+				return (
+					<Squares
+						speed={0.5}
+						squareSize={40}
+						direction="diagonal" // up, down, left, right, diagonal
+						borderColor="#fff"
+						hoverFillColor="#222"
+					/>
+				);
+			default:
+				return (
+					<Waves
+						lineColor="#fff"
+						backgroundColor="rgba(255, 255, 255, 0.2)"
+						waveSpeedX={0.02}
+						waveSpeedY={0.01}
+						waveAmpX={40}
+						waveAmpY={20}
+						friction={0.9}
+						tension={0.01}
+						maxCursorMove={120}
+						xGap={12}
+						yGap={36}
+					/>
+				);
+		}
+	};
+
 	const renderContentBoxes = (landscapeMode = false) => (
 		<div className="flex flex-col gap-4">
 			{/* These r the description and skills boxes */}
-			<motion.div
-				className={`flex ${landscapeMode ? "gap-6" : "flex-col md:flex-row gap-4 md:gap-6"
-					}`}
+			<div
+				className={`flex ${
+					landscapeMode ? "gap-6" : "flex-col md:flex-row gap-4 md:gap-6"
+				}`}
 				initial={{ opacity: 0, y: 40, scale: 0.95 }}
 				whileInView={{ opacity: 1, y: 0, scale: 1 }}
 				viewport={{ once: true, amount: 0.3 }}
 				transition={{ duration: 0.7, ease: "easeOut" }}
 			>
-				<motion.div
+				<div
 					className={`${landscapeMode ? "w-1/2" : "sm:w-full"} flex-1`}
 					style={{
 						background:
-							"linear-gradient(90deg, rgba(101, 134, 199, 0.44), rgba(226, 57, 66, 0.44))",
+							"linear-gradient(90deg, rgba(101, 134, 199, 1), rgba(226, 57, 66, 1))",
 					}}
 					initial={{ opacity: 0, x: -30, rotate: -2 }}
 					whileInView={{ opacity: 1, x: 0, rotate: 0 }}
@@ -96,12 +161,14 @@ const SubteamSection = () => {
 					transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
 				>
 					<div
-						className={`${landscapeMode ? "p-6" : "p-4 sm:p-6"
-							} h-full flex flex-col`}
+						className={`${
+							landscapeMode ? "p-6" : "p-4 sm:p-6"
+						} h-full flex flex-col`}
 					>
 						<h3
-							className={`${landscapeMode ? "text-lg" : "text-base sm:text-lg"
-								} font-bold mb-4 text-white tracking-wide`}
+							className={`${
+								landscapeMode ? "text-lg" : "text-base sm:text-lg"
+							} font-bold mb-4 text-white tracking-wide`}
 							style={{ fontFamily: "HK Modular, sans-serif" }}
 						>
 							DESCRIPTION
@@ -114,12 +181,12 @@ const SubteamSection = () => {
 								documentToReactComponents(activeTeamData.description)}
 						</div>
 					</div>
-				</motion.div>
-				<motion.div
+				</div>
+				<div
 					className={`${landscapeMode ? "w-1/2" : "sm:w-full"} flex-1`}
 					style={{
 						background:
-							"linear-gradient(90deg, rgba(101, 134, 199, 0.44), rgba(226, 57, 66, 0.44))",
+							"linear-gradient(90deg, rgba(101, 134, 199, 1), rgba(226, 57, 66, 1))",
 					}}
 					initial={{ opacity: 0, x: 30, rotate: 2 }}
 					whileInView={{ opacity: 1, x: 0, rotate: 0 }}
@@ -127,12 +194,14 @@ const SubteamSection = () => {
 					transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
 				>
 					<div
-						className={`${landscapeMode ? "p-6" : "p-4 sm:p-6"
-							} h-full flex flex-col`}
+						className={`${
+							landscapeMode ? "p-6" : "p-4 sm:p-6"
+						} h-full flex flex-col`}
 					>
 						<h3
-							className={`${landscapeMode ? "text-lg" : "text-base sm:text-lg"
-								} font-bold mb-4 text-white tracking-wide`}
+							className={`${
+								landscapeMode ? "text-lg" : "text-base sm:text-lg"
+							} font-bold mb-4 text-white tracking-wide`}
 							style={{ fontFamily: "HK Modular, sans-serif" }}
 						>
 							SKILLS
@@ -145,14 +214,14 @@ const SubteamSection = () => {
 								documentToReactComponents(activeTeamData.skills)}
 						</div>
 					</div>
-				</motion.div>
-			</motion.div>
+				</div>
+			</div>
 			{/* Sub-Team Leadership Section */}
-			<motion.div
+			<div
 				className="w-full"
 				style={{
 					background:
-						"linear-gradient(90deg, rgba(101, 134, 199, 0.44), rgba(226, 57, 66, 0.44))",
+						"linear-gradient(90deg, rgba(101, 134, 199, 1), rgba(226, 57, 66, 1))",
 				}}
 				initial={{ opacity: 0, y: 30 }}
 				whileInView={{ opacity: 1, y: 0 }}
@@ -161,8 +230,9 @@ const SubteamSection = () => {
 			>
 				<div className={`${landscapeMode ? "p-6" : "p-4 sm:p-6"}`}>
 					<h3
-						className={`${landscapeMode ? "text-lg" : "text-base sm:text-lg"
-							} font-bold mb-16 text-white tracking-wide pl-1`}
+						className={`${
+							landscapeMode ? "text-lg" : "text-base sm:text-lg"
+						} font-bold mb-16 text-white tracking-wide pl-1`}
 						style={{ fontFamily: "HK Modular, sans-serif" }}
 					>
 						SUB-TEAM LEADERSHIP
@@ -212,20 +282,36 @@ const SubteamSection = () => {
 							))}
 					</div>
 				</div>
-			</motion.div>
+			</div>
 		</div>
 	);
 
 	// the text on the left side. probs dont wanna hard code this either. ill fix that later.
 	return (
 		<div className="relative">
+			{isLandscape && (
+				<div className="absolute inset-0 mx-36 ">
+					<div
+						className="absolute inset-0 mx-36 p-2 rounded-2xl border-white overflow-hidden"
+						style={{
+							background: "linear-gradient(90deg, #6586c7, #e23942)",
+						}}
+					>
+						{backgroundEffect()}
+					</div>
+				</div>
+			)}
 
-			<BiographyModal activeLead={activeLead} setShowModal={setShowModal} showModal={showModal} />
-			<div className="relative flex flex-col pt-2 pb-4 px-8 sm:pt-3 sm:pb-6 sm:px-15 lg:pt-4 lg:pb-8 lg:px-8 items-center">
+			<BiographyModal
+				activeLead={activeLead}
+				setShowModal={setShowModal}
+				showModal={showModal}
+			/>
+			<div className="relative flex flex-col pt-10 pb-4 px-8  sm:py-3 sm:pb-6 sm:px-15 lg:py-16 lg:pb-8 lg:px-8 items-center">
 				<div className="max-w-screen flex-1 flex flex-col mt-0 mb-5 mx-5 md:max-w-7xl md:mx-auto w-full items-center justify-center">
 					{/* Main Content */}
 					{isLandscape ? (
-						<motion.div
+						<div
 							className="flex-1 flex gap-12 items-start"
 							initial={{ opacity: 0, y: 60 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -233,12 +319,16 @@ const SubteamSection = () => {
 							transition={{ duration: 0.7, ease: "easeOut" }}
 						>
 							{/* Left Column - Intro Text */}
-							<motion.div
-								className="w-1/3 flex flex-col justify-start"
+							<div
+								className="w-1/3 flex flex-col justify-start p-3 rounded"
 								initial={{ opacity: 0, x: -40 }}
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true, amount: 0.3 }}
 								transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
+								style={{
+									background:
+										"linear-gradient(90deg, rgba(101, 134, 199, 1), rgba(226, 57, 66, 1))",
+								}}
 							>
 								<div className="space-y-6 text-sm leading-relaxed">
 									<p>
@@ -261,9 +351,9 @@ const SubteamSection = () => {
 										Click on their profiles to learn more about them.
 									</p>
 								</div>
-							</motion.div>
+							</div>
 							{/* Right Section */}
-							<motion.div
+							<div
 								className="w-2/3 flex flex-col"
 								initial={{ opacity: 0, x: 40 }}
 								whileInView={{ opacity: 1, x: 0 }}
@@ -281,10 +371,10 @@ const SubteamSection = () => {
 										{renderContentBoxes(true)}
 									</>
 								)}
-							</motion.div>
-						</motion.div>
+							</div>
+						</div>
 					) : (
-						<motion.div
+						<div
 							className="flex-1 flex flex-col"
 							initial={{ opacity: 0, y: 60 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -292,7 +382,7 @@ const SubteamSection = () => {
 							transition={{ duration: 0.7, ease: "easeOut" }}
 						>
 							{/* Intro Text at top for portrait. Is there a better way to do this for mobile? Eddy you'll probs see this while ur doing mobile ui and shake your head lol */}
-							<motion.div
+							<div
 								className="mb-8"
 								initial={{ opacity: 0, y: 30 }}
 								whileInView={{ opacity: 1, y: 0 }}
@@ -317,8 +407,8 @@ const SubteamSection = () => {
 										new perspective can go a long way in our success.
 									</p>
 								</div>
-							</motion.div>
-							<motion.div
+							</div>
+							<div
 								initial={{ opacity: 0, scale: 0.95 }}
 								whileInView={{ opacity: 1, scale: 1 }}
 								viewport={{ once: true, amount: 0.3 }}
@@ -331,8 +421,8 @@ const SubteamSection = () => {
 									landscapeMode={false}
 								/>
 								{renderContentBoxes(false)}
-							</motion.div>
-						</motion.div>
+							</div>
+						</div>
 					)}
 				</div>
 			</div>

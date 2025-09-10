@@ -3,8 +3,6 @@ import { contentfulClient } from "../../utils/contentful";
 import GradientFrame from "../ui/GradientFrame";
 import { motion } from "framer-motion";
 
-import Particles from "../ui/backgrounds/Particles";
-import Hyperspeed, { hyperspeedPresets } from "../ui/backgrounds/Hyperspeed";
 const MentorshipSection = () => {
 	const [mentorImageUrl, setMentorImageUrl] = useState("");
 
@@ -24,12 +22,6 @@ const MentorshipSection = () => {
 
 	return (
 		<div className="relative" id="mentor-internal">
-			<div className="absolute inset-0 z-0">
-				<Hyperspeed
-					effectOptions={hyperspeedPresets.one}
-					parentContainerId={"mentor-internal"}
-				/>
-			</div>
 			<div className="flex flex-col items-center justify-center pt-2 px-4 md:px-12 max-w-screen gap-12 relative z-30">
 				<div className="flex flex-col md:flex-row items-center gap-12 max-w-full md:max-w-[80%]">
 					<div className="w-full md:w-1/2 flex justify-center">
@@ -47,17 +39,20 @@ const MentorshipSection = () => {
 					</div>
 					<div className="w-full md:w-1/2 space-y-6 text-sm leading-relaxed">
 						<p>
-							Although we are primarily a student led team, we rely on mentors to
-							help provide the experience and advanced knowledge needed to
+							Although we are primarily a student led team, we rely on mentors
+							to help provide the experience and advanced knowledge needed to
 							successfully build a functioning robot, manage a team, and
 							fundraise.
 						</p>
 						<p>
-							Whether you are an expect in a technical field or just love robots,
-							there is a place for you on our team! New perspectives are always
-							helpful in our process.
+							Whether you are an expect in a technical field or just love
+							robots, there is a place for you on our team! New perspectives are
+							always helpful in our process.
 						</p>
-						<p>See the section above to learn more about our subteams, the skills that go into them, and their current leadership</p>
+						<p>
+							See the section above to learn more about our subteams, the skills
+							that go into them, and their current leadership
+						</p>
 					</div>
 				</div>
 				<motion.div
