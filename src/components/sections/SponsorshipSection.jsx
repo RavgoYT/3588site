@@ -37,7 +37,7 @@ const SponsorshipSection = () => {
 					particleColors={['#ffffff', '#ffffff']}
 					particleCount={500}
 					particleSpread={10}
-					speed={0.1}
+					speed={0.03}
 					particleBaseSize={100}
 					moveParticlesOnHover={false}
 					alphaParticles={true}
