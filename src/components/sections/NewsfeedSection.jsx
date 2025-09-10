@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PixelBlast from "../ui/backgrounds/PixelBlast";
 import ContentCarousel from "../ui/carousel/ImageCarousel";
 
+
 const NewsfeedSection = () => {
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Tailwind md breakpoint is 768px
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth < 768);
+		};
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 	return (
 		<section id="newsfeed" className="py-0 bg-black h-full relative overflow-hidden">
-			<div className="absolute inset-0 -z-0">
+			{!isMobile && (<div className="absolute inset-0 -z-0" key="persistent-background">
 				<PixelBlast variant="square"
 					pixelSize={4}
 					color="#5884D5"
@@ -17,7 +27,7 @@ const NewsfeedSection = () => {
 					transparent
 
 				/>
-			</div>
+			</div>)}
 			<div className="relative container mx-auto px-8 z-10">
 				{/* "Brought to you by" with logo */}
 				<div className="flex justify-center lg:mb-14">

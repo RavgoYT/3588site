@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl';
 
 const defaultColors = ['#ffffff', '#ffffff', '#ffffff'];
@@ -238,4 +238,4 @@ const Particles = ({
   return <div ref={containerRef} className={`relative ${className}`} style={{ height: "100%" }} />;
 };
 
-export default Particles;
+export default memo(Particles);

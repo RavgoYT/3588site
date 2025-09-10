@@ -17,7 +17,10 @@
     "bootstrap": "^5.3.6",
     "contentful": "^11.7.15",
     "framer-motion": "^12.23.6",
+    "gsap": "^3.13.0",
     "lucide-react": "^0.507.0",
+    "ogl": "^1.0.11",
+    "postprocessing": "^6.37.7",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.0.0",
@@ -25,6 +28,7 @@
     "react-markdown": "^10.1.0",
     "react-select": "^5.10.2",
     "swiper": "^11.2.8",
+    "three": "^0.180.0",
     "txt-shuffle": "^1.0.3"
   },
   "devDependencies": {

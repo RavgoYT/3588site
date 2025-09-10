@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import * as THREE from 'three';
 import { EffectComposer, EffectPass, RenderPass, Effect } from 'postprocessing';
 
@@ -292,7 +292,8 @@ void main(){
 
 const MAX_CLICKS = 10;
 
-const PixelBlast = ({
+
+const PixelBlast = memo(function PixelBlast({
   variant = 'square',
   pixelSize = 3,
   color = '#B19EEF',
@@ -315,7 +316,7 @@ const PixelBlast = ({
   transparent = true,
   edgeFade = 0.5,
   noiseAmount = 0
-}) => {
+}) {
   const containerRef = useRef(null);
   const visibilityRef = useRef({ visible: true });
   const speedRef = useRef(speed);
@@ -593,6 +594,6 @@ const PixelBlast = ({
       aria-label="PixelBlast interactive background"
     />
   );
-};
+});
 
 export default PixelBlast;
