@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
-import Particles from "../ui/backgrounds/Particles";
 import { fadeIn } from "../../utils/animations";
+
+const Particles = lazy(() => import("../ui/backgrounds/Particles"));
 
 const AboutSection = () => {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+	useEffect(() => {
+		const handleResize = () => setWindowWidth(window.innerWidth);
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
-  // Determine speed based on Tailwind breakpoints
-  let particleSpeed = 0.03; // default speed
-  if (windowWidth < 1280) {
-    particleSpeed = 0.08; // faster for screens up to xl
-  }
+	// Determine speed based on Tailwind breakpoints
+	let particleSpeed = 0.03; // default speed
+	if (windowWidth < 1280) {
+		particleSpeed = 0.08; // faster for screens up to xl
+	}
 
-  const isMobile = windowWidth < 768;
+	const isMobile = windowWidth < 768;
 
 	return (
 		<section
@@ -27,16 +28,18 @@ const AboutSection = () => {
 		>
 			{!isMobile && (
 				<div className="mt-20 absolute inset-0 -z-0">
-					<Particles
-						particleColors={["#ffffff", "#ffffff"]}
-						particleCount={300}
-						particleSpread={10}
-						speed={particleSpeed}
-						particleBaseSize={100}
-						moveParticlesOnHover={false}
-						alphaParticles={true}
-						disableRotation={false}
-					/>
+					<Suspense fallback={null}>
+						<Particles
+							particleColors={["#ffffff", "#ffffff"]}
+							particleCount={300}
+							particleSpread={10}
+							speed={particleSpeed}
+							particleBaseSize={100}
+							moveParticlesOnHover={false}
+							alphaParticles={true}
+							disableRotation={false}
+						/>
+					</Suspense>
 				</div>
 			)}
 			<div className="w-5/6 container mx-auto px-8">
