@@ -155,7 +155,7 @@ const ContentCarousel = () => {
 
 	return (
 		<div className="w-full text-white flex justify-center items-center py-8 z-20">
-			<div className="w-full max-w-7xl mx-auto px-4 mr-13">
+			<div className="w-full max-w-7xl mx-auto px-4 lg:mr-13">
 				<div className="flex flex-col md:flex-row gap-10 items-center md:items-center">
 					<div className="flex-shrink-0 relative">
 						<GradientImageFrame>
@@ -167,7 +167,7 @@ const ContentCarousel = () => {
 									autoplay={{ delay: 8000, disableOnInteraction: true }}
 									onSwiper={setSwiperInstance}
 									onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
-									className="aspect-3/2 w-[85vw] md:w-[40vw] max-w-[500px] lg:max-w-[650px]"
+									className="aspect-3/2 w-[75vw] md:w-[40vw] max-w-[500px] lg:max-w-[650px]"
 									effect="slide"
 									speed={500}
 									loop={true}
@@ -224,7 +224,7 @@ const ContentCarousel = () => {
 						style={{ fontFamily: "HK Modular" }}
 					>
 						{/* No motion here, just TextShuffle */}
-						<h3 className="text-4xl font-bold uppercase tracking-wide">
+						<h3 className="text-xl lg:text-4xl font-bold uppercase tracking-wide">
 							<TextShuffle
 								text={slides[currentSlide].title}
 								style={{ fontFamily: "HK Modular" }}

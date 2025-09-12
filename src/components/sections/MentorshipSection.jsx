@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { contentfulClient } from "../../utils/contentful";
 import GradientFrame from "../ui/GradientFrame";
 import { motion } from "framer-motion";
+import GradientButton from "../ui/GradientButton";
 
 const MentorshipSection = () => {
 	const [mentorImageUrl, setMentorImageUrl] = useState("");
@@ -63,23 +64,12 @@ const MentorshipSection = () => {
 					transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
 				>
 					<h2
-						className="text-lg font-bold tracking-[0.2em] text-white mb-8"
+						className="text-2xl lg:text-4xl font-bold tracking-[0.2em] text-white mb-8"
 						style={{ fontFamily: "HK Modular, sans-serif" }}
 					>
 						INTERESTED IN SIGNING UP TO MENTOR OR HAVE QUESTIONS?
 					</h2>
-					<a
-						href="https://docs.google.com/forms/d/e/1FAIpQLSf3CEYRFiTSqTRevbfUh1hhwWLFUK2HFYo_NsTJTmWRXdPgCQ/viewform?usp=sharing&ouid=101389165596220670387"
-						target="_blank"
-						rel="noopener noreferrer"
-						className="mt-6 inline-block px-8 py-4 rounded-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl"
-						style={{
-							background: "linear-gradient(90deg, #6586c7, #e23942)",
-							letterSpacing: "0.1em",
-						}}
-					>
-						MENTOR INTEREST FORM
-					</a>
+					<GradientButton  href={"https://docs.google.com/forms/d/e/1FAIpQLSf3CEYRFiTSqTRevbfUh1hhwWLFUK2HFYo_NsTJTmWRXdPgCQ/viewform?usp=sharing&ouid=101389165596220670387"} ><p className="uppercase font-black text-white">Mentor interest form</p> </GradientButton>
 				</motion.div>
 			</div>
 		</div>

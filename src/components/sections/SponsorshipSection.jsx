@@ -79,7 +79,7 @@ const SponsorshipSection = () => {
 										className="w-screen h-full object-cover"
 									/>
 								</div>
-								<h3 className="text-lg font-display font-bold">{level.name}</h3>
+								<h3 className="text-2xl font-display font-bold">{level.name}</h3>
 							</div>
 						))}
 					</div>

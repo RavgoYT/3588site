@@ -74,7 +74,7 @@ const NewsfeedSection = () => {
 				fadeOutColor="#000000"
 				ariaLabel="Brand Logos"
 			/>
-			<div className="relative container mx-auto px-8 z-10">
+			<div className="lg:relative container mx-auto px-8 z-10">
 				{/* "Brought to you by" with logo */}
 
 				<ContentCarousel />

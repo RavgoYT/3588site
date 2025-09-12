@@ -287,38 +287,30 @@ const SubteamSection = () => {
 	// the text on the left side. probs dont wanna hard code this either. ill fix that later.
 	return (
 		<div className="relative">
-			{isLandscape && (
-				<div className="absolute inset-0 mx-36 ">
-					<div
-						className="absolute inset-0 mx-36 p-2 rounded-2xl border-white overflow-hidden"
-						style={{
-							background: "linear-gradient(90deg, #6586c7, #e23942)",
-						}}
-					>
-						{backgroundEffect()}
-					</div>
-				</div>
-			)}
-
 			<BiographyModal
 				activeLead={activeLead}
 				setShowModal={setShowModal}
 				showModal={showModal}
 			/>
 			<div className="relative flex flex-col pt-10 pb-4 px-8  sm:py-3 sm:pb-6 sm:px-15 lg:py-16 lg:pb-8 lg:px-8 items-center">
-				<div className="max-w-screen flex-1 flex flex-col mt-0 mb-5 mx-5 md:max-w-7xl md:mx-auto w-full items-center justify-center">
+				<div className="max-w-screen flex-1 flex flex-col mt-0 mb-5 mx-5 md:mx-auto w-full items-center justify-center ">
 					{/* Main Content */}
 					{isLandscape ? (
 						<div
-							className="flex-1 flex gap-12 items-center"
+							className="relative rounded-2xl w-full z-10 flex-1 flex flex-col 2xl:flex-row gap-5 p-8 items-center overflow-hidden"
+							style={{
+								background: "linear-gradient(90deg, #6586c7, #e23942)",
+							}}
 							initial={{ opacity: 0, y: 60 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true, amount: 0.3 }}
 							transition={{ duration: 0.7, ease: "easeOut" }}
 						>
+							<div className="absolute inset-0 rounded-2xl z-0 ">{backgroundEffect()}</div>
+
 							{/* Left Column - Intro Text */}
 							<div
-								className="w-1/3 flex flex-col justify-start p-3 rounded"
+								className="flex w-full 2xl:w-1/3 flex-col justify-start p-3 rounded z-10"
 								initial={{ opacity: 0, x: -40 }}
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true, amount: 0.3 }}
@@ -352,7 +344,7 @@ const SubteamSection = () => {
 							</div>
 							{/* Right Section */}
 							<div
-								className="w-2/3 flex flex-col"
+								className="w-2/3 flex flex-col z-10"
 								initial={{ opacity: 0, x: 40 }}
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true, amount: 0.3 }}
