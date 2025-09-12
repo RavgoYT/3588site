@@ -36,6 +36,7 @@ export default function Header() {
 		{section: "mentors", bg:"#FDFCDC", text:'text-black'},
 		{section: "contact", bg:"#FFD3DA", text:'text-black'},
 		{section: "schedule", path: "/schedule", bg:"#88c7b5", text:'text-black'},
+		{section: "gallery", path: "/gallery", bg:"#88c7b5", text:'text-black'},
 	]
 	useEffect(() => {
 		const handleScroll = () => {
@@ -154,6 +155,9 @@ export default function Header() {
 						))}
 						<Link to="/schedule" className="header-link font-sans transition font-[400] text-[var(--color-poppy)] hover:font-[700]">
 							Schedule
+						</Link>
+						<Link to="/gallery" className="header-link font-sans transition font-[400] text-[var(--color-poppy)] hover:font-[700]">
+							Gallery
 						</Link>
 					</nav>
 				</div>
