@@ -1,6 +1,7 @@
 /* index.css */
 
 @import "tailwindcss";
+@layer theme, base, components, utilities;
 
 /* Probs wanna convert these fonts to woff or sumn in the future */
 @font-face {

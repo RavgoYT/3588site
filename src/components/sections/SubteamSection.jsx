@@ -3,7 +3,7 @@ import InteractiveSubteamChart from "../ui/interactiveChart/InteractiveSubteamCh
 import { Box, Hammer, Zap, Code, Camera, Clipboard } from "lucide-react";
 import { contentfulClient } from "../../utils/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import BiographyModal from "../ui/BiographyModal";
+import BiographyModal from "../ui/modal/BiographyModal";
 import Waves from "../ui/backgrounds/Waves";
 import Beams from "../ui/backgrounds/Beams";
 import LetterGlitch from "../ui/backgrounds/LetterGlitch";
@@ -44,7 +44,7 @@ const SubteamSection = () => {
 					key: item.fields.name.toLowerCase(),
 				}));
 				setSubteams(subteamData);
-				setActiveTeamData(subteamData.find((team) => team.key === "cad")); // Default to CAD - this shouldn't be set here but oh well
+				setActiveTeamData(subteamData.find((team) => team.key === "pm")); // Default to CAD - this shouldn't be set here but oh well
 			} catch (error) {
 				console.error("Error fetching data from Contentful:", error);
 				return [];
@@ -166,9 +166,7 @@ const SubteamSection = () => {
 						} h-full flex flex-col`}
 					>
 						<h3
-							className={`${
-								landscapeMode ? "text-lg" : "text-base sm:text-lg"
-							} font-bold mb-4 text-white tracking-wide`}
+							className={"text-base font-bold mb-4 text-white tracking-wide"}
 							style={{ fontFamily: "HK Modular, sans-serif" }}
 						>
 							DESCRIPTION
@@ -312,7 +310,7 @@ const SubteamSection = () => {
 					{/* Main Content */}
 					{isLandscape ? (
 						<div
-							className="flex-1 flex gap-12 items-start"
+							className="flex-1 flex gap-12 items-center"
 							initial={{ opacity: 0, y: 60 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true, amount: 0.3 }}

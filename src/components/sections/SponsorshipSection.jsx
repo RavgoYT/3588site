@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { fadeIn } from "../../utils/animations";
 import SponsorshipCarousel from "../ui/carousel/SponsorshipCarousel";
 import { contentfulClient } from "../../utils/contentful";
-import { Modal, Button } from "react-bootstrap";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Particles from "../ui/backgrounds/Particles";
+import SponsorshipModal from "../ui/modal/SponsorshipModal";
+
 const SponsorshipSection = () => {
 	const [sponsorshipLevels, setSponsorshipLevels] = useState([])
 	const [showModal, setShowModal] = useState(false);
@@ -46,37 +46,7 @@ const SponsorshipSection = () => {
 				/>
 			</div>
 			<div className="z-10 relative">
-				<Modal
-					className="bg-gray-900/50"
-					dialogClassName="modal-fullscreen rounded-modal"
-					data-bs-theme="dark"
-					show={showModal}
-					backdrop={true}
-					onHide={() => setShowModal(false)}
-					centered
-				>
-					{/* BORDER */}
-					<div
-						className="relative rounded-xl p-[2px]"
-						style={{
-							background: "linear-gradient(90deg, #6586c7, #e23942)",
-						}}
-					>
-						<div className="bg-gray-900/90 rounded-xl">
-							<Modal.Header closeButton>
-								<Modal.Title className="">{activeLevelData?.name}</Modal.Title>
-							</Modal.Header>
-							<Modal.Body>
-								{documentToReactComponents(activeLevelData?.description)}
-							</Modal.Body>
-							<Modal.Footer>
-								<Button variant="secondary" onClick={() => setShowModal(false)}>
-									Close
-								</Button>
-							</Modal.Footer>
-						</div>
-					</div>
-				</Modal>
+				<SponsorshipModal showModal={showModal} setShowModal={setShowModal} activeLevelData={activeLevelData} />
 
 
 				<div className="container mx-auto px-8">
