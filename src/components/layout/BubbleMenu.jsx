@@ -174,7 +174,7 @@ export default function BubbleMenu({
         style={{ background: menuBg }}
       >
         <span
-          className="menu-line block mx-auto rounded-[2px]"
+          className="menu-line block rounded-[2px]"
           style={{
             width: 26,
             height: 2,
@@ -184,7 +184,7 @@ export default function BubbleMenu({
           }}
         />
         <span
-          className="menu-line short block mx-auto rounded-[2px]"
+          className="menu-line short block rounded-[2px]"
           style={{
             marginTop: '6px',
             width: 26,
@@ -208,7 +208,6 @@ export default function BubbleMenu({
               'flex items-center justify-center',
               'pointer-events-none',
               'z-[1000]',
-              'bg-black/20 backdrop-blur-sm'
             ].join(' ')}
             aria-hidden={!isMenuOpen}
           >
