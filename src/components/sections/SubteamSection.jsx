@@ -10,6 +10,9 @@ import LetterGlitch from "../ui/backgrounds/LetterGlitch";
 import Lightning from "../ui/backgrounds/Lightning";
 import BallPit from "../ui/backgrounds/BallPit";
 import Squares from "../ui/backgrounds/Squares";
+import GridDistortion from "../ui/backgrounds/DotGrid";
+import RippleGrid from "../ui/backgrounds/DotGrid";
+import DotGrid from "../ui/backgrounds/DotGrid";
 
 const SubteamSection = () => {
 	const [activeTeam, setActiveTeam] = useState("pm");
@@ -72,15 +75,16 @@ const SubteamSection = () => {
 		switch (activeTeam) {
 			case "cad":
 				return (
-					<Beams
-						beamWidth={2}
-						beamHeight={10}
-						beamNumber={15}
-						lightColor="#ffffff"
-						speed={2}
-						noiseIntensity={1.75}
-						scale={0.2}
-						rotation={30}
+					<DotGrid
+						dotSize={5}
+						gap={15}
+						baseColor="#000000"
+						activeColor="#5227FF"
+						proximity={130}
+						shockRadius={250}
+						shockStrength={5}
+						resistance={750}
+						returnDuration={1.5}
 					/>
 				);
 			case "programming":
@@ -306,7 +310,9 @@ const SubteamSection = () => {
 							viewport={{ once: true, amount: 0.3 }}
 							transition={{ duration: 0.7, ease: "easeOut" }}
 						>
-							<div className="absolute inset-0 rounded-2xl z-0 ">{backgroundEffect()}</div>
+							<div className="absolute inset-0 rounded-2xl z-0 ">
+								{backgroundEffect()}
+							</div>
 
 							{/* Left Column - Intro Text */}
 							<div
