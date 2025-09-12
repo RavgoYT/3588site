@@ -4,15 +4,7 @@ import { Box, Hammer, Zap, Code, Camera, Clipboard } from "lucide-react";
 import { contentfulClient } from "../../utils/contentful";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import BiographyModal from "../ui/modal/BiographyModal";
-import Waves from "../ui/backgrounds/Waves";
-import Beams from "../ui/backgrounds/Beams";
-import LetterGlitch from "../ui/backgrounds/LetterGlitch";
-import Lightning from "../ui/backgrounds/Lightning";
-import BallPit from "../ui/backgrounds/BallPit";
-import Squares from "../ui/backgrounds/Squares";
-import GridDistortion from "../ui/backgrounds/DotGrid";
-import RippleGrid from "../ui/backgrounds/DotGrid";
-import DotGrid from "../ui/backgrounds/DotGrid";
+import DynamicBackground from "../ui/backgrounds/DynamicBackground";
 
 const SubteamSection = () => {
 	const [activeTeam, setActiveTeam] = useState("pm");
@@ -70,76 +62,6 @@ const SubteamSection = () => {
 			window.removeEventListener("orientationchange", checkOrientation);
 		};
 	}, []);
-
-	const backgroundEffect = () => {
-		switch (activeTeam) {
-			case "cad":
-				return (
-					<DotGrid
-						dotSize={5}
-						gap={15}
-						baseColor="#000000"
-						activeColor="#5227FF"
-						proximity={130}
-						shockRadius={250}
-						shockStrength={5}
-						resistance={750}
-						returnDuration={1.5}
-					/>
-				);
-			case "programming":
-				return (
-					<LetterGlitch
-						glitchSpeed={50}
-						centerVignette={true}
-						outerVignette={false}
-						smooth={true}
-					/>
-				);
-
-			case "electrical":
-				return (
-					<Lightning hue={220} xOffset={0} speed={1} intensity={1} size={1} />
-				);
-			case "outreach":
-				return (
-					<BallPit
-						count={50}
-						gravity={0.01}
-						friction={0.9975}
-						wallBounce={0.9975}
-						followCursor={true}
-						colors={["#e23942", "#3f71cf", "#0d4b7b"]}
-					/>
-				);
-			case "fab":
-				return (
-					<Squares
-						speed={0.5}
-						squareSize={40}
-						direction="diagonal" // up, down, left, right, diagonal
-						borderColor="#fff"
-						hoverFillColor="#222"
-					/>
-				);
-			default:
-				return (
-					<Waves
-						lineColor="#fff"
-						backgroundColor="rgba(255, 255, 255, 0.2)"
-						waveSpeedX={0.02}
-						waveSpeedY={0.01}
-						waveAmpX={40}
-						waveAmpY={20}
-						friction={0.9}
-						tension={0.01}
-						maxCursorMove={120}
-						xGap={12}
-						yGap={36}
-					/>
-				);
-		}
-	};
 
 	const renderContentBoxes = (landscapeMode = false) => (
 		<div className="flex flex-col gap-4">
@@ -230,16 +152,16 @@ const SubteamSection = () => {
 				viewport={{ once: true, amount: 0.3 }}
 				transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
 			>
-				<div className={`${landscapeMode ? "p-6" : "p-4 sm:p-6"}`}>
+				<div className="pb-5">
 					<h3
 						className={`${
 							landscapeMode ? "text-lg" : "text-base sm:text-lg"
-						} font-bold mb-16 text-white tracking-wide pl-1`}
+						} font-bold mb-5 2xl:mb-8 text-white tracking-wide pt-6 pl-4`}
 						style={{ fontFamily: "HK Modular, sans-serif" }}
 					>
 						SUB-TEAM LEADERSHIP
 					</h3>
-					<div className="pt-3 flex flex-col md:flex-row justify-center gap-8 sm:gap-12">
+					<div className="flex flex-col md:flex-row justify-center gap-8 sm:gap-12">
 						{Array.isArray(activeTeamData?.leads) &&
 							activeTeamData.leads.map((leader, index) => (
 								<div
@@ -290,7 +212,7 @@ const SubteamSection = () => {
 
 	// the text on the left side. probs dont wanna hard code this either. ill fix that later.
 	return (
-		<div className="relative">
+		<div id="subteam-section" className="relative">
 			<BiographyModal
 				activeLead={activeLead}
 				setShowModal={setShowModal}
@@ -311,7 +233,7 @@ const SubteamSection = () => {
 							transition={{ duration: 0.7, ease: "easeOut" }}
 						>
 							<div className="absolute inset-0 rounded-2xl z-0 ">
-								{backgroundEffect()}
+								<DynamicBackground activeTeam={activeTeam} />
 							</div>
 
 							{/* Left Column - Intro Text */}
@@ -350,7 +272,7 @@ const SubteamSection = () => {
 							</div>
 							{/* Right Section */}
 							<div
-								className="w-2/3 flex flex-col z-10"
+								className="2xl:w-2/3 flex flex-col z-10"
 								initial={{ opacity: 0, x: 40 }}
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true, amount: 0.3 }}

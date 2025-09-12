@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 export default function BubbleMenu({
-  logo,
   onMenuClick,
-  className,
-  style,
   menuAriaLabel = 'Toggle menu',
   menuBg = '#fff',
   menuContentColor = '#111',
@@ -25,17 +22,7 @@ export default function BubbleMenu({
   const bubblesRef = useRef([]);
   const labelRefs = useRef([]);
 
-  const menuItems = items?.length ? items : DEFAULT_ITEMS;
-
-  const containerClassName = [
-    'bubble-menu',
-    'flex items-right justify-between',
-    'gap-4 px-8',
-    'z-[1001]',
-    className
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const menuItems = items?.length ? items : [];
 
   const handleToggle = () => {
     const nextState = !isMenuOpen;
@@ -121,6 +108,17 @@ export default function BubbleMenu({
     return () => window.removeEventListener('resize', handleResize);
   }, [isMenuOpen, menuItems]);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   return (
     <>
       {/* Workaround for silly Tailwind capabilities */}
@@ -129,51 +127,30 @@ export default function BubbleMenu({
           transition: transform 0.3s ease, opacity 0.3s ease;
           transform-origin: center;
         }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
-          margin-left: calc(100% / 6);
+        .bubble-menu-items {
+          padding-top: 120px;
+          align-items: flex-start;
         }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
-          margin-left: calc(100% / 3);
+        .bubble-menu-items .pill-list {
+          row-gap: 16px;
         }
-        @media (min-width: 900px) {
-          .bubble-menu-items .pill-link {
-            transform: rotate(var(--item-rot));
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: rotate(var(--item-rot)) scale(1.06);
-            background: var(--hover-bg) !important;
-            color: var(--hover-color) !important;
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: rotate(var(--item-rot)) scale(.94);
-          }
+        .bubble-menu-items .pill-list .pill-col {
+          flex: 0 0 100% !important;
+          margin-left: 0 !important;
+          overflow: visible;
         }
-        @media (max-width: 899px) {
-          .bubble-menu-items {
-            padding-top: 120px;
-            align-items: flex-start;
-          }
-          .bubble-menu-items .pill-list {
-            row-gap: 16px;
-          }
-          .bubble-menu-items .pill-list .pill-col {
-            flex: 0 0 100% !important;
-            margin-left: 0 !important;
-            overflow: visible;
-          }
-          .bubble-menu-items .pill-link {
-            font-size: clamp(1.2rem, 3vw, 4rem);
-            padding: clamp(1rem, 2vw, 2rem) 0;
-            min-height: 60px !important;
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: scale(1.06);
-            background: var(--hover-bg);
-            color: var(--hover-color);
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: scale(.94);
-          }
+        .bubble-menu-items .pill-link {
+          font-size: clamp(1.2rem, 3vw, 4rem);
+          padding: clamp(1rem, 2vw, 2rem) 0;
+          min-height: 60px !important;
+        }
+        .bubble-menu-items .pill-link:hover {
+          transform: scale(1.06);
+          background: var(--hover-bg);
+          color: var(--hover-color);
+        }
+        .bubble-menu-items .pill-link:active {
+          transform: scale(.94);
         }
       `}</style>
 
@@ -230,7 +207,8 @@ export default function BubbleMenu({
               'inset-0',
               'flex items-center justify-center',
               'pointer-events-none',
-              'z-[1000]'
+              'z-[1000]',
+              'bg-black/20 backdrop-blur-sm'
             ].join(' ')}
             aria-hidden={!isMenuOpen}
           >
@@ -239,7 +217,7 @@ export default function BubbleMenu({
                 'pill-list',
                 'list-none m-0 px-6',
                 'w-full max-w-[1600px] mx-auto',
-                'flex flex-wrap',
+                'flex flex-col',
                 'gap-x-0 gap-y-1',
                 'pointer-events-auto'
               ].join(' ')}
@@ -253,7 +231,6 @@ export default function BubbleMenu({
                   className={[
                     'pill-col',
                     'flex justify-center items-stretch',
-                    '[flex:0_0_calc(100%/3)]',
                     'box-border'
                   ].join(' ')}
                 >
