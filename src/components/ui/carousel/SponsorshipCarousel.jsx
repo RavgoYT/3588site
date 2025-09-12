@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../../utils/animations";
-import SliderDots from "../SliderDots";
-import GradientArrows from "../GradientArrows";
+import SliderDots from "./SliderDots";
+import GradientArrows from "./GradientArrows";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
