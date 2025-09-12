@@ -111,7 +111,7 @@ export default function Header() {
 						menuAriaLabel="Toggle navigation"
 						menuBg="#ffffff"
 						menuContentColor="#111111"
-						useFixedPosition={false}
+						useFixedPosition={true}
 						animationEase="back.out(1.5)"
 						animationDuration={0.5}
 						staggerDelay={0.12}

@@ -230,16 +230,16 @@ const SubteamSection = () => {
 				viewport={{ once: true, amount: 0.3 }}
 				transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
 			>
-				<div className={`${landscapeMode ? "p-6" : "p-4 sm:p-6"}`}>
+				<div className="pb-5">
 					<h3
 						className={`${
 							landscapeMode ? "text-lg" : "text-base sm:text-lg"
-						} font-bold mb-16 text-white tracking-wide pl-1`}
+						} font-bold mb-5 2xl:mb-8 text-white tracking-wide pt-6 pl-4`}
 						style={{ fontFamily: "HK Modular, sans-serif" }}
 					>
 						SUB-TEAM LEADERSHIP
 					</h3>
-					<div className="pt-3 flex flex-col md:flex-row justify-center gap-8 sm:gap-12">
+					<div className="flex flex-col md:flex-row justify-center gap-8 sm:gap-12">
 						{Array.isArray(activeTeamData?.leads) &&
 							activeTeamData.leads.map((leader, index) => (
 								<div
@@ -350,7 +350,7 @@ const SubteamSection = () => {
 							</div>
 							{/* Right Section */}
 							<div
-								className="w-2/3 flex flex-col z-10"
+								className="2xl:w-2/3 flex flex-col z-10"
 								initial={{ opacity: 0, x: 40 }}
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true, amount: 0.3 }}
