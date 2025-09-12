@@ -15,7 +15,7 @@ const AboutSection = () => {
   // Determine speed based on Tailwind breakpoints
   let particleSpeed = 0.03; // default speed
   if (windowWidth < 1280) {
-    particleSpeed = 0.3; // faster for screens up to xl
+    particleSpeed = 0.08; // faster for screens up to xl
   }
 
   const isMobile = windowWidth < 768;
