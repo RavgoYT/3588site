@@ -102,6 +102,7 @@ export default function InteractiveSubteamChart({ subteams, activeTeam, setActiv
                 {/* Circular Button */}
                 <button
                   onClick={() => setActiveTeam(team.key)}
+                  data-testid={`subteam-button-${team.key}`}
                   className={`mentorship-circle-btn ${landscapeMode ? 'w-[72px] h-[72px]' : 'w-[55.2px] h-[55.2px] sm:w-[72px] sm:h-[72px]'} flex items-center justify-center relative z-10`}
                   style={{ background: 'linear-gradient(90deg, #6586c7, #e23942)', padding: 0, border: 'none', borderRadius: '9999px', fontFamily: 'TT Norms Pro, sans-serif' }}
                 >
