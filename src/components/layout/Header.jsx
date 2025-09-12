@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import BubbleMenu from "./BubbleMenu";
 
-const Link = ({ section, currentSection, onClick, className = "" }) => {
+const ScrollLink = ({ section, currentSection, onClick, className = "" }) => {
 	return (
 		<a
 			href={`#${section}`}
@@ -34,6 +35,7 @@ export default function Header() {
 		{section: "subteams", bg:"#a875f7", text:'text-white'},
 		{section: "mentors", bg:"#FDFCDC", text:'text-black'},
 		{section: "contact", bg:"#FFD3DA", text:'text-black'},
+		{section: "schedule", path: "/schedule", bg:"#88c7b5", text:'text-black'},
 	]
 	useEffect(() => {
 		const handleScroll = () => {
@@ -111,7 +113,7 @@ export default function Header() {
 						menuAriaLabel="Toggle navigation"
 						menuBg="#ffffff"
 						menuContentColor="#111111"
-						useFixedPosition={false}
+						useFixedPosition={true}
 						animationEase="back.out(1.5)"
 						animationDuration={0.5}
 						staggerDelay={0.12}
@@ -143,13 +145,16 @@ export default function Header() {
 					</div>
 					<nav className="flex space-x-6">
 						{sections.map((section) => (
-							<Link
+							<ScrollLink
 								key={section}
 								section={section}
 								currentSection={currentSection}
 								onClick={handleClick}
 							/>
 						))}
+						<Link to="/schedule" className="header-link font-sans transition font-[400] text-[var(--color-poppy)] hover:font-[700]">
+							Schedule
+						</Link>
 					</nav>
 				</div>
 			</header>

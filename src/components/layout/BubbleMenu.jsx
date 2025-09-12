@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { Link } from 'react-router-dom';
 
 
 export default function BubbleMenu({
-  logo,
   onMenuClick,
-  className,
-  style,
   menuAriaLabel = 'Toggle menu',
   menuBg = '#fff',
   menuContentColor = '#111',
@@ -24,17 +22,7 @@ export default function BubbleMenu({
   const bubblesRef = useRef([]);
   const labelRefs = useRef([]);
 
-  const menuItems = items?.length ? items : DEFAULT_ITEMS;
-
-  const containerClassName = [
-    'bubble-menu',
-    'flex items-right justify-between',
-    'gap-4 px-8',
-    'z-[1001]',
-    className
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const menuItems = items?.length ? items : [];
 
   const handleToggle = () => {
     const nextState = !isMenuOpen;
@@ -120,6 +108,17 @@ export default function BubbleMenu({
     return () => window.removeEventListener('resize', handleResize);
   }, [isMenuOpen, menuItems]);
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   return (
     <>
       {/* Workaround for silly Tailwind capabilities */}
@@ -128,51 +127,30 @@ export default function BubbleMenu({
           transition: transform 0.3s ease, opacity 0.3s ease;
           transform-origin: center;
         }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
-          margin-left: calc(100% / 6);
+        .bubble-menu-items {
+          padding-top: 120px;
+          align-items: flex-start;
         }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
-          margin-left: calc(100% / 3);
+        .bubble-menu-items .pill-list {
+          row-gap: 16px;
         }
-        @media (min-width: 900px) {
-          .bubble-menu-items .pill-link {
-            transform: rotate(var(--item-rot));
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: rotate(var(--item-rot)) scale(1.06);
-            background: var(--hover-bg) !important;
-            color: var(--hover-color) !important;
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: rotate(var(--item-rot)) scale(.94);
-          }
+        .bubble-menu-items .pill-list .pill-col {
+          flex: 0 0 100% !important;
+          margin-left: 0 !important;
+          overflow: visible;
         }
-        @media (max-width: 899px) {
-          .bubble-menu-items {
-            padding-top: 120px;
-            align-items: flex-start;
-          }
-          .bubble-menu-items .pill-list {
-            row-gap: 16px;
-          }
-          .bubble-menu-items .pill-list .pill-col {
-            flex: 0 0 100% !important;
-            margin-left: 0 !important;
-            overflow: visible;
-          }
-          .bubble-menu-items .pill-link {
-            font-size: clamp(1.2rem, 3vw, 4rem);
-            padding: clamp(1rem, 2vw, 2rem) 0;
-            min-height: 60px !important;
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: scale(1.06);
-            background: var(--hover-bg);
-            color: var(--hover-color);
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: scale(.94);
-          }
+        .bubble-menu-items .pill-link {
+          font-size: clamp(1.2rem, 3vw, 4rem);
+          padding: clamp(1rem, 2vw, 2rem) 0;
+          min-height: 60px !important;
+        }
+        .bubble-menu-items .pill-link:hover {
+          transform: scale(1.06);
+          background: var(--hover-bg);
+          color: var(--hover-color);
+        }
+        .bubble-menu-items .pill-link:active {
+          transform: scale(.94);
         }
       `}</style>
 
@@ -229,7 +207,8 @@ export default function BubbleMenu({
               'inset-0',
               'flex items-center justify-center',
               'pointer-events-none',
-              'z-[1000]'
+              'z-[1000]',
+              'bg-black/20 backdrop-blur-sm'
             ].join(' ')}
             aria-hidden={!isMenuOpen}
           >
@@ -238,7 +217,7 @@ export default function BubbleMenu({
                 'pill-list',
                 'list-none m-0 px-6',
                 'w-full max-w-[1600px] mx-auto',
-                'flex flex-wrap',
+                'flex flex-col',
                 'gap-x-0 gap-y-1',
                 'pointer-events-auto'
               ].join(' ')}
@@ -252,61 +231,114 @@ export default function BubbleMenu({
                   className={[
                     'pill-col',
                     'flex justify-center items-stretch',
-                    '[flex:0_0_calc(100%/3)]',
                     'box-border'
                   ].join(' ')}
                 >
-                  <a
-                    onClick={() => handleMenuChange(item.section)}
-                    role="menuitem"
-                    aria-label={item.section || item.section}
-                    className={[
-                      'pill-link',
-                      'w-full',
-                      'rounded-[999px]',
-                      'no-underline',
-                      'text-inherit',
-                      'shadow-[0_4px_14px_rgba(0,0,0,0.10)]',
-                      'flex items-center justify-center',
-                      'relative',
-                      'transition-[background,color] duration-300 ease-in-out',
-                      'box-border',
-                      'whitespace-nowrap overflow-hidden',
-                      item.text,
-                      item.bg
-                    ].join(' ')}
-                    style={{
-                      ['--item-rot']: `${item.rotation ?? 0}deg`,
-                      ['--pill-bg']: item.bg,
-                      ['--pill-color']: menuContentColor,
-                      ['--hover-bg']: item.hoverStyles?.bgColor || '#f3f4f6',
-                      ['--hover-color']: item.hoverStyles?.textColor || menuContentColor,
-                      background: 'var(--pill-bg)',
-                      color: 'var(--pill-color)',
-                      minHeight: '60px',
-                      padding: '0.5rem 1rem',
-                      fontSize: 'clamp(1rem, 2vw, 2rem)',
-                      fontWeight: 400,
-                      lineHeight: 1.2,
-                      willChange: 'transform'
-                    }}
-                    ref={el => {
-                      if (el) bubblesRef.current[idx] = el;
-                    }}
-                  >
-                    <span
-                      className="pill-label inline-block"
+                  {item.path ? (
+                    <Link
+                      to={item.path}
+                      role="menuitem"
+                      aria-label={item.section}
+                      className={[
+                        'pill-link',
+                        'w-full',
+                        'rounded-[999px]',
+                        'no-underline',
+                        'text-inherit',
+                        'shadow-[0_4px_14px_rgba(0,0,0,0.10)]',
+                        'flex items-center justify-center',
+                        'relative',
+                        'transition-[background,color] duration-300 ease-in-out',
+                        'box-border',
+                        'whitespace-nowrap overflow-hidden',
+                        item.text,
+                        item.bg
+                      ].join(' ')}
                       style={{
-                        willChange: 'transform, opacity',
-                        lineHeight: 1.2
+                        ['--item-rot']: `${item.rotation ?? 0}deg`,
+                        ['--pill-bg']: item.bg,
+                        ['--pill-color']: menuContentColor,
+                        ['--hover-bg']: item.hoverStyles?.bgColor || '#f3f4f6',
+                        ['--hover-color']: item.hoverStyles?.textColor || menuContentColor,
+                        background: 'var(--pill-bg)',
+                        color: 'var(--pill-color)',
+                        minHeight: '60px',
+                        padding: '0.5rem 1rem',
+                        fontSize: 'clamp(1rem, 2vw, 2rem)',
+                        fontWeight: 400,
+                        lineHeight: 1.2,
+                        willChange: 'transform'
                       }}
                       ref={el => {
-                        if (el) labelRefs.current[idx] = el;
+                        if (el) bubblesRef.current[idx] = el;
                       }}
                     >
-                      {item.section}
-                    </span>
-                  </a>
+                      <span
+                        className="pill-label inline-block"
+                        style={{
+                          willChange: 'transform, opacity',
+                          lineHeight: 1.2
+                        }}
+                        ref={el => {
+                          if (el) labelRefs.current[idx] = el;
+                        }}
+                      >
+                        {item.section}
+                      </span>
+                    </Link>
+                  ) : (
+                    <a
+                      onClick={() => handleMenuChange(item.section)}
+                      role="menuitem"
+                      aria-label={item.section || item.section}
+                      className={[
+                        'pill-link',
+                        'w-full',
+                        'rounded-[999px]',
+                        'no-underline',
+                        'text-inherit',
+                        'shadow-[0_4px_14px_rgba(0,0,0,0.10)]',
+                        'flex items-center justify-center',
+                        'relative',
+                        'transition-[background,color] duration-300 ease-in-out',
+                        'box-border',
+                        'whitespace-nowrap overflow-hidden',
+                        item.text,
+                        item.bg
+                      ].join(' ')}
+                      style={{
+                        ['--item-rot']: `${item.rotation ?? 0}deg`,
+                        ['--pill-bg']: item.bg,
+                        ['--pill-color']: menuContentColor,
+                        ['--hover-bg']: item.hoverStyles?.bgColor || '#f3f4f6',
+                        ['--hover-color']: item.hoverStyles?.textColor || menuContentColor,
+                        background: 'var(--pill-bg)',
+                        color: 'var(--pill-color)',
+                        minHeight: '60px',
+                        padding: '0.5rem 1rem',
+                        fontSize: 'clamp(1rem, 2vw, 2rem)',
+                        fontWeight: 400,
+                        lineHeight: 1.2,
+                        willChange: 'transform'
+                      }}
+                      ref={el => {
+                        if (el) bubblesRef.current[idx] = el;
+                      }}
+                    >
+                      <span
+                        className="pill-label inline-block"
+                        style={{
+                          willChange: 'transform, opacity',
+                          lineHeight: 1.2
+                        }}
+                        ref={el => {
+                          if (el) labelRefs.current[idx] = el;
+                        }}
+                      >
+                        {item.section}
+                      </span>
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

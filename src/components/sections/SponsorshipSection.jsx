@@ -1,14 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { fadeIn } from "../../utils/animations";
 import SponsorshipCarousel from "../ui/carousel/SponsorshipCarousel";
 import { contentfulClient } from "../../utils/contentful";
-import Particles from "../ui/backgrounds/Particles";
 import SponsorshipModal from "../ui/modal/SponsorshipModal";
+
+const Particles = lazy(() => import("../ui/backgrounds/Particles"));
 
 const SponsorshipSection = () => {
 	const [sponsorshipLevels, setSponsorshipLevels] = useState([])
 	const [showModal, setShowModal] = useState(false);
 	const [activeLevelData, setActiveLevelData] = useState([]);
+	const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+	useEffect(() => {
+		const handleResize = () => {
+			setIsMobile(window.innerWidth < 768);
+		};
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 
 	useEffect(() => {
@@ -32,19 +42,23 @@ const SponsorshipSection = () => {
 
 	return (
 		<section id="sponsors" className="relative md:py-20">
-			<div className="absolute inset-0 z-0">
-				<Particles
-					particleColors={['#ffffff', '#ffffff']}
-					particleCount={500}
-					particleSpread={10}
-					speed={0.03}
-					particleBaseSize={100}
-					moveParticlesOnHover={false}
-					alphaParticles={true}
-					disableRotation={false}
-					className="h-full w-full"
-				/>
-			</div>
+			{!isMobile && (
+				<div className="absolute inset-0 z-0">
+					<Suspense fallback={null}>
+						<Particles
+							particleColors={['#ffffff', '#ffffff']}
+							particleCount={500}
+							particleSpread={10}
+							speed={0.03}
+							particleBaseSize={100}
+							moveParticlesOnHover={false}
+							alphaParticles={true}
+							disableRotation={false}
+							className="h-full w-full"
+						/>
+					</Suspense>
+				</div>
+			)}
 			<div className="z-10 relative">
 				<SponsorshipModal showModal={showModal} setShowModal={setShowModal} activeLevelData={activeLevelData} />
 

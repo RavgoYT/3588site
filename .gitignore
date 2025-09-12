@@ -26,3 +26,4 @@ dist-ssr
 yarn.lock
 coverage/
 /coverage
+package-lock.json
