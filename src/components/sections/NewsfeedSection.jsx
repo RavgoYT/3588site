@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import PixelBlast from "../ui/backgrounds/PixelBlast";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import ContentCarousel from "../ui/carousel/ImageCarousel";
 import LogoLoop from "../ui/LogoLoop";
 import { contentfulClient } from "../../utils/contentful";
 
+const PixelBlast = lazy(() => import("../ui/backgrounds/PixelBlast"));
 
 const NewsfeedSection = () => {
 	const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Tailwind md breakpoint is 768px
@@ -50,17 +50,19 @@ const NewsfeedSection = () => {
 		>
 			{!isMobile && (
 				<div className="absolute inset-0 -z-0" key="persistent-background">
-					<PixelBlast
-						variant="square"
-						pixelSize={4}
-						color="#5884D5"
-						patternScale={3}
-						patternDensity={0.3}
-						pixelSizeJitter={0}
-						speed={0.5}
-						edgeFade={0.25}
-						transparent
-					/>
+					<Suspense fallback={null}>
+						<PixelBlast
+							variant="square"
+							pixelSize={4}
+							color="#5884D5"
+							patternScale={3}
+							patternDensity={0.3}
+							pixelSizeJitter={0}
+							speed={0.5}
+							edgeFade={0.25}
+							transparent
+						/>
+					</Suspense>
 				</div>
 			)}
 			<LogoLoop
