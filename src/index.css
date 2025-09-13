@@ -83,6 +83,11 @@ body.modal-open {
 	--color-bd-navy-blue: #1e3769;
 }
 
+@theme inline {
+  --color-poppy: var(--color-poppy);
+	--color-navy-blue: var(--color-navy-blue);
+}
+
 
 a {
 	font-weight: 500;

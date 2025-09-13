@@ -7,10 +7,11 @@ const ScrollLink = ({ section, currentSection, onClick, className = "" }) => {
 	return (
 		<a
 			href={`#${section}`}
-			className={`header-link font-sans transition ${className} ${currentSection === section
+			className={`header-link font-sans transition ${className} ${
+				currentSection === section
 					? "font-[700] text-[var(--color-poppy)]"
 					: "font-[400] text-[var(--color-poppy)] hover:font-[700]"
-				}`}
+			}`}
 			onClick={(e) => {
 				e.preventDefault();
 				onClick(section);
@@ -26,17 +27,24 @@ export default function Header() {
 	const [currentSection, setCurrentSection] = useState("home");
 	const headerRef = useRef(null);
 
-	const sections = ["home", "about", "newsfeed", "sponsors", "subteams", "mentors", "contact"];
+	const sections = [
+		"about",
+		"newsfeed",
+		"sponsors",
+		"subteams",
+		"mentors",
+		"contact",
+	];
 	const mobileSections = [
-		{section: "home", bg:"#6687c8", text:'text-white'},
-		{section: "about", bg:"#e23942", text:'text-white'},
-		{section: "newsfeed", bg:"#cb6ce6", text:'text-white'},
-		{section: "sponsors", bg:"#c8c866", text:'text-black'},
-		{section: "subteams", bg:"#a875f7", text:'text-white'},
-		{section: "mentors", bg:"#FDFCDC", text:'text-black'},
-		{section: "contact", bg:"#FFD3DA", text:'text-black'},
-		{section: "schedule", path: "/schedule", bg:"#88c7b5", text:'text-black'},
-	]
+		{ section: "home", bg: "#6687c8", text: "text-white" },
+		{ section: "about", bg: "#e23942", text: "text-white" },
+		{ section: "newsfeed", bg: "#cb6ce6", text: "text-white" },
+		{ section: "sponsors", bg: "#c8c866", text: "text-black" },
+		{ section: "subteams", bg: "#a875f7", text: "text-white" },
+		{ section: "mentors", bg: "#FDFCDC", text: "text-black" },
+		{ section: "contact", bg: "#FFD3DA", text: "text-black" },
+		{ section: "gallery", path: "/gallery", bg: "#88c7b5", text: "text-black" },
+	];
 	useEffect(() => {
 		const handleScroll = () => {
 			const isScrolled = window.scrollY > 20;
@@ -95,8 +103,9 @@ export default function Header() {
 			{/* Mobile NavBar */}
 			<header
 				ref={headerRef}
-				className={`fixed min-[1150px]:hidden left-1/2 transform -translate-x-1/2 w-full max-w-[90%] sm:max-w-[75%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-lg bg-gradient-to-r from-[var(--color-navy-blue)]/60 to-[var(--color-poppy)]/60 ${scrolled ? "py-4 px-8" : "py-4 px-8"
-					}`}
+				className={`fixed min-[1150px]:hidden left-1/2 transform -translate-x-1/2 w-full max-w-[90%] sm:max-w-[75%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-lg bg-gradient-to-r from-[var(--color-navy-blue)]/60 to-[var(--color-poppy)]/60 ${
+					scrolled ? "py-4 px-8" : "py-4 px-8"
+				}`}
 				style={{ top: scrolled ? "1.5rem" : 0 }}
 			>
 				<div className="flex flex-row items-center align-middle justify-between w-full">
@@ -123,8 +132,9 @@ export default function Header() {
 			</header>
 			{/* Desktop NavBar */}
 			<header
-				className={`hidden min-[1150px]:block fixed left-1/2 transform -translate-x-1/2 w-full max-w-[90%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-lg bg-gradient-to-r from-[var(--color-navy-blue)]/60 to-[var(--color-poppy)]/60 ${scrolled ? "py-4 px-8" : "py-4 px-8"
-					}`}
+				className={`hidden min-[1150px]:block fixed left-1/2 transform -translate-x-1/2 w-full max-w-[90%] z-50 rounded-2xl transition-all duration-450 ease-in-out backdrop-blur-lg bg-gradient-to-r from-[var(--color-navy-blue)]/60 to-[var(--color-poppy)]/60 ${
+					scrolled ? "py-4 px-8" : "py-4 px-8"
+				}`}
 				style={{ top: scrolled ? "1.5rem" : 0 }}
 			>
 				<div className="flex flex-row justify-between items-center w-full">
@@ -144,6 +154,12 @@ export default function Header() {
 						</h1>
 					</div>
 					<nav className="flex space-x-6">
+						<Link
+							to="/"
+							className="header-link font-sans transition font-[400] text-[var(--color-poppy)] hover:font-[700]"
+						>
+							Home
+						</Link>
 						{sections.map((section) => (
 							<ScrollLink
 								key={section}
@@ -152,13 +168,21 @@ export default function Header() {
 								onClick={handleClick}
 							/>
 						))}
-						<Link to="/schedule" className="header-link font-sans transition font-[400] text-[var(--color-poppy)] hover:font-[700]">
+						<Link
+							to="/schedule"
+							className="header-link font-sans transition font-[400] text-[var(--color-poppy)] hover:font-[700]"
+						>
 							Schedule
+						</Link>
+						<Link
+							to="/gallery"
+							className="header-link font-sans transition font-[400] text-[var(--color-poppy)] hover:font-[700]"
+						>
+							Gallery
 						</Link>
 					</nav>
 				</div>
 			</header>
-			
 		</>
 	);
 }
