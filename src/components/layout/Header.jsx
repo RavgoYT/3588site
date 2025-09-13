@@ -137,9 +137,9 @@ export default function Header() {
 				}`}
 				style={{ top: scrolled ? "1.5rem" : 0 }}
 			>
-				<div className="flex flex-row justify-between items-center w-full">
-					<div className="flex items-center space-x-6">
-						<h1 className="!text-base select-none font-bold md:!text-2xl lg:!text-base xl:!text-2xl 2xl:!text-3xl">
+				<div className="flex flex-row justify-between items-center w-full cursor-pointer">
+					<Link className="flex items-center space-x-6" to="/">
+						<h1 className="!text-base text-white select-none font-bold md:!text-2xl lg:!text-base xl:!text-2xl 2xl:!text-3xl">
 							TEAM 3588
 						</h1>
 						<div className="h-12 w-12 bg-white/0 rounded-sm flex items-center justify-center">
@@ -149,10 +149,10 @@ export default function Header() {
 								className="h-full w-auto"
 							/>
 						</div>
-						<h1 className="!text-base md:!text-3xl lg:!text-base select-none xl:!text-2xl 2xl:!text-3xl">
+						<h1 className="!text-base text-white md:!text-3xl lg:!text-base select-none xl:!text-2xl 2xl:!text-3xl">
 							THE TALON
 						</h1>
-					</div>
+					</Link>
 					<nav className="flex space-x-6">
 						<Link
 							to="/"
