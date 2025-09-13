@@ -37,7 +37,7 @@ const HeroSection = ({ scrollY }) => {
 		return (
 			<section
 				id="home"
-				className="relative h-screen flex items-center justify-center bg-black"
+				className="relative h-screen flex items-center justify-center bg-black md:pt-50"
 			>
 				{/* <div className="w-full text-center">
           <p className="text-xl uppercase font-[TTNorms] tracking-[0.5rem] text-white">
@@ -82,7 +82,7 @@ const HeroSection = ({ scrollY }) => {
 	return (
 		<section
 			id="home"
-			className="relative h-screen flex items-center justify-center pb-15 md:pb-120 overflow-hidden"
+			className="relative h-screen flex items-center justify-center mt-20 md:pt-50 md:pb-120 overflow-hidden"
 		>
 			<div className="absolute inset-0 z-0">{/* No gradient background */}</div>
 			<div

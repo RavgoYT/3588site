@@ -109,14 +109,19 @@ export default function Header() {
 				style={{ top: scrolled ? "1.5rem" : 0 }}
 			>
 				<div className="flex flex-row items-center align-middle justify-between w-full">
-					<div className="w-10 h-1o bg-white/0 rounded-sm hidden items-center justify-center sm:flex">
+					<Link
+						to={"/"}
+						className="w-10 h-1o bg-white/0 rounded-sm hidden items-center justify-center sm:flex cursor-pointer"
+					>
 						<img
 							src="./images/mainlogo.svg"
 							alt="Team 3588 Logo"
 							className="h-full w-auto"
 						/>
-					</div>
-					<h1 className="uppercase !text-xl !mb-0">Team 3588</h1>
+					</Link>
+					<Link to={"/"} className=" !mb-0 cursor-pointer ">
+						<h1 className="uppercase !text-xl text-white">Team 3588</h1>
+					</Link>
 					<BubbleMenu
 						handleClick={handleClick}
 						menuAriaLabel="Toggle navigation"
