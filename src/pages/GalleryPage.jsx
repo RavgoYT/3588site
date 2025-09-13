@@ -5,36 +5,44 @@ import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 
 export default function GalleryPage() {
-  const [images, setImages] = useState([]);
+	const [images, setImages] = useState([]);
 
-  useEffect(() => {
-    contentfulClient
-      .getAssets({
-        "metadata.tags.sys.id[in]": "gallery",
-      })
-      .then((response) => {
-        const items = response.items.map((item) => ({
-          id: item.sys.id,
-          img: item.fields.file.url,
-          height: item.fields.file.details.image.height,
-          width: item.fields.file.details.image.width,
-          url: item.fields.file.url,
-        }));
-        setImages(items);
-      })
-      .catch(console.error);
-  }, []);
+	useEffect(() => {
+		contentfulClient
+			.getEntries({
+				content_type: "galleryEntry",
+				order: "-fields.date",
+			})
+			.then((response) => {
+        console.log(response);
+				const items = response.items.map((item) => ({
+					id: item.sys.id,
+					height: item.fields.image.fields.file.details.image.height,
+					width: item.fields.image.fields.file.details.image.width,
+					url: item.fields.image.fields.file.url,
+					img: item.fields.image.fields.file.url,
+          description: item.fields.description || "",
+          title: item.fields.title || ""
+				}));
+				setImages(items);
+			})
+			.catch(console.error);
+	}, []);
 
-  return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden font-['TT Norms Pro']">
-      <Header />
-      <main className="pt-16 w-screen overflow-hidden">
-        <div className="p-4">
-          <h1 className="text-4xl font-bold text-center my-8">Gallery</h1>
-          <Masonry items={images} />
-        </div>
-      </main>
-      <Footer />
-    </div>
-  );
+	return (
+		<div className="p-4 pt-16">
+			<h1 className="text-4xl font-bold text-center my-8 pb-8">Gallery</h1>
+			<Masonry
+				items={images}
+				ease="power3.out"
+				duration={0.6}
+				stagger={0.05}
+				animateFrom="bottom"
+				scaleOnHover={true}
+				hoverScale={0.95}
+				blurToFocus={true}
+				colorShiftOnHover={true}
+			/>
+		</div>
+	);
 }

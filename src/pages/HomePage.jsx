@@ -23,41 +23,31 @@ export default function HomePage() {
 	}, []);
 
 	return (
-		<div className="min-h-screen bg-black text-white overflow-x-hidden font-'TT Norms Pro'">
-			{/* Header */}
-			<Header />
-
-			{/* Main content container */}
-			<main className="md:pt-16 w-screen overflow-hidden">
-
-				{" "}
-				{/* Add padding top to account for fixed header */}
-				{/* Hero Section */}
-				<HeroSection scrollY={scrollY} />
-				{/* About Section */}
-				<AboutSection />
-				{/* Section Divider */}
-				<SectionDivider title="NEWSFEED" />
-				{/* Newsfeed Section */}
-				<NewsfeedSection />
-				{/* Section Divider */}
-				<SectionDivider title="SPONSORSHIP INFO" />
-				{/* Sponsorship Section */}
-				<SponsorshipSection />
-				{/* Section Divider */}
-				<SectionDivider title="SUBTEAM INFO" id="subteams" />
-				{/* Mentorship Section */}
-				<SubteamSection />
-				<SectionDivider title="MENTORSHIP" id="mentors" />
-				<MentorshipSection />
-				{/* Section Divider */}
-				<SectionDivider title="CONTACT US !!!" />
-				{/* Contact Section */}
-				<ContactSection />
-			</main>
-
-			{/* Footer */}
-			<Footer />
-		</div>
+		<>
+			{" "}
+			{/* Add padding top to account for fixed header */}
+			{/* Hero Section */}
+			<HeroSection scrollY={scrollY} />
+			{/* About Section */}
+			<AboutSection />
+			{/* Section Divider */}
+			<SectionDivider title="NEWSFEED" />
+			{/* Newsfeed Section */}
+			<NewsfeedSection />
+			{/* Section Divider */}
+			<SectionDivider title="SPONSORSHIP INFO" />
+			{/* Sponsorship Section */}
+			<SponsorshipSection />
+			{/* Section Divider */}
+			<SectionDivider title="SUBTEAM INFO" id="subteams" />
+			{/* Mentorship Section */}
+			<SubteamSection />
+			<SectionDivider title="MENTORSHIP" id="mentors" />
+			<MentorshipSection />
+			{/* Section Divider */}
+			<SectionDivider title="CONTACT US !!!" />
+			{/* Contact Section */}
+			<ContactSection />
+		</>
 	);
 }
